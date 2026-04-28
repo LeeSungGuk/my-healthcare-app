@@ -105,12 +105,13 @@ a {
 .landing-hero {
   position: relative;
   display: grid;
-  align-items: end;
-  min-height: calc(100vh - 72px);
-  padding: 76px 28px 34px;
+  align-items: center;
+  min-height: calc(100vh - 132px);
+  padding: 72px 28px 40px;
   color: #ffffff;
   background:
-    linear-gradient(90deg, rgba(11, 21, 19, 0.96) 0%, rgba(11, 21, 19, 0.78) 44%, rgba(11, 21, 19, 0.24) 100%),
+    linear-gradient(90deg, rgba(7, 18, 16, 0.98) 0%, rgba(7, 18, 16, 0.94) 38%, rgba(7, 18, 16, 0.68) 68%, rgba(7, 18, 16, 0.2) 100%),
+    linear-gradient(180deg, rgba(7, 18, 16, 0.2) 0%, rgba(7, 18, 16, 0.72) 100%),
     url("/assets/console-home-preview.png");
   background-position: center top;
   background-size: cover;
@@ -135,9 +136,8 @@ a {
 }
 
 .landing-hero .eyebrow,
-.hero-subtitle,
-.hero-media-caption {
-  color: rgba(255, 255, 255, 0.76);
+.hero-subtitle {
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .landing-hero h1 {
@@ -145,6 +145,7 @@ a {
   color: #ffffff;
   font-size: clamp(44px, 7vw, 82px);
   line-height: 0.98;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.2);
 }
 
 .hero-subtitle {
@@ -169,17 +170,11 @@ a {
   margin-top: 28px;
 }
 
-.hero-media-caption {
-  max-width: 620px;
-  margin-top: 16px;
-  font-size: 13px;
-}
-
 .landing-stat {
   min-width: 168px;
   padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 8px;
 }
 
@@ -193,7 +188,7 @@ a {
 }
 
 .landing-stat span {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.82);
   font-size: 12px;
 }
 
@@ -915,8 +910,8 @@ textarea {
   }
 
   .landing-hero {
-    min-height: 760px;
-    padding: 72px 18px 30px;
+    min-height: calc(100vh - 210px);
+    padding: 44px 18px 24px;
     background-position: 68% top;
   }
 
@@ -924,7 +919,6 @@ textarea {
     display: none;
   }
 
-  .hero-trust-row,
   .logo-wall,
   .workflow-strip,
   .safety-grid,
@@ -932,8 +926,24 @@ textarea {
     grid-template-columns: 1fr;
   }
 
+  .hero-trust-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
   .landing-stat {
+    min-width: 0;
     width: 100%;
+    padding: 10px;
+  }
+
+  .landing-stat strong {
+    font-size: 22px;
+  }
+
+  .landing-stat span {
+    font-size: 10px;
   }
 
   .logo-wall,

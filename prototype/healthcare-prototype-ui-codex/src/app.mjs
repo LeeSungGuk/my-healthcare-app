@@ -255,7 +255,6 @@ function renderLanding() {
             ${landingStat("9", "Partner Console routes")}
             ${landingStat("2s", "p95 initial view target")}
           </div>
-          <p class="hero-media-caption">Background shows the actual Partner Console prototype surface: role-aware navigation, tenant context, and privacy-first module access.</p>
         </div>
       </section>
 
