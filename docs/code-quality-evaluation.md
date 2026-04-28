@@ -1,6 +1,6 @@
 # Code Quality Evaluation
 
-이 문서는 `prototype/healthcare-prototype-ui-codex`의 현재 코드 품질을 프로토타이핑 완료 기준으로 평가한다.
+이 문서는 루트 실행형 SilverCare Partner Console 프로토타입의 현재 코드 품질을 프로토타이핑 완료 기준으로 평가한다.
 
 ## Overall Assessment
 

@@ -125,8 +125,9 @@ Full component analysis: [`docs/component-structure-analysis.md`](docs/component
 ## Project Structure
 
 ```text
-prototype/healthcare-prototype-ui-codex
+my-healthcare-app
 ├── README.md
+├── UX_FLOW.md
 ├── assets
 │   └── console-home-preview.png
 ├── docs
@@ -137,6 +138,11 @@ prototype/healthcare-prototype-ui-codex
 ├── index.html
 ├── package.json
 ├── server.mjs
+├── healthcare-figma-wireframe-cards
+│   ├── README.md
+│   ├── assets
+│   ├── src
+│   └── tests
 ├── src
 │   ├── app.mjs
 │   ├── mock-data.mjs

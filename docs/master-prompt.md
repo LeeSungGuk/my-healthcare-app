@@ -2,7 +2,7 @@
 
 Build a runnable SilverCare Partner Console UI prototype from the frontend task specs.
 
-The project must stay inside `healthcare-prototype-ui-codex/prototype`.
+The runnable project now lives at the repository root. Keep the executable UI in the root `src`, `assets`, `tests`, and `docs` structure unless a later migration explicitly changes it.
 
 The product scope is B2B Partner Console only. Include console home, API key manager, API docs, playground, sandbox scenario picker, response viewer, cURL and TypeScript snippets, PoC report, ops monitoring, review queue, consent admin, and route inventory.
 

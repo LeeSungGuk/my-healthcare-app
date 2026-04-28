@@ -1,6 +1,6 @@
 # Component Structure Analysis
 
-이 문서는 `prototype/healthcare-prototype-ui-codex` 실행형 프로토타입의 컴포넌트 구조 현황과 개선점을 정리한다. 현재 구현은 프레임워크 의존성 없이 `src/app.mjs`가 public landing page와 Partner Console 전체 UI를 렌더링하는 정적 SPA 형태다.
+이 문서는 루트 실행형 프로토타입의 컴포넌트 구조 현황과 개선점을 정리한다. 현재 구현은 프레임워크 의존성 없이 `src/app.mjs`가 public landing page와 Partner Console 전체 UI를 렌더링하는 정적 SPA 형태다.
 
 ## Component Tree
 

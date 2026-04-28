@@ -1,6 +1,6 @@
 # Landing Page Checklist Evaluation
 
-이 문서는 `prototype/healthcare-prototype-ui-codex`에 추가한 public landing page를 사용 의향 극대화 관점에서 점검한 결과다.
+이 문서는 루트 실행형 프로토타입에 추가한 public landing page를 사용 의향 극대화 관점에서 점검한 결과다.
 
 ## STEP 0. Service Type Diagnosis
 
