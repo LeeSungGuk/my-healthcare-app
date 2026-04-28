@@ -1,0 +1,186 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: Figma wireframe card board
+      - heading "SilverCare Partner Console, organized as a design deck" [level=1] [ref=e7]
+      - paragraph [ref=e8]: The current running homepage is broken down into card-game style wireframes. Each card captures a screen, its route, core blocks, and privacy guardrails.
+      - generic [ref=e9]:
+        - generic [ref=e10]:
+          - generic [ref=e11]: Columns
+          - strong [ref=e12]: "5"
+        - generic [ref=e13]:
+          - generic [ref=e14]: Cards
+          - strong [ref=e15]: "9"
+        - generic [ref=e16]:
+          - generic [ref=e17]: Guardrails
+          - strong [ref=e18]: "26"
+    - figure "Source capture from http://localhost:4173/#/console" [ref=e19]:
+      - img "Captured SilverCare Partner Console homepage" [ref=e20]
+      - generic [ref=e21]: Source capture from http://localhost:4173/#/console
+  - region "Board filters" [ref=e22]:
+    - button "All cards" [ref=e23] [cursor=pointer]
+    - button "Foundation" [ref=e24] [cursor=pointer]
+    - button "Developer Portal" [ref=e25] [cursor=pointer]
+    - button "Playground" [ref=e26] [cursor=pointer]
+    - button "Operations" [ref=e27] [cursor=pointer]
+    - button "Governance" [ref=e28] [cursor=pointer]
+  - generic [ref=e29]:
+    - article [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - heading "Foundation" [level=2] [ref=e33]
+          - paragraph [ref=e34]: Authenticated shell and scope boundary
+        - generic [ref=e35]: "1"
+      - button "/console All authenticated partner roles Console Home Shows tenant, role, environment, and accessible modules. Role-aware navigation Tenant isolation No app routes outside Partner Console" [ref=e37] [cursor=pointer]:
+        - generic [ref=e38]:
+          - generic [ref=e39]: /console
+          - strong [ref=e40]: All authenticated partner roles
+        - generic [ref=e58]:
+          - heading "Console Home" [level=3] [ref=e59]
+          - paragraph [ref=e60]: Shows tenant, role, environment, and accessible modules.
+          - generic [ref=e61]:
+            - generic [ref=e62]: Role-aware navigation
+            - generic [ref=e63]: Tenant isolation
+            - generic [ref=e64]: No app routes outside Partner Console
+    - article [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - heading "Developer Portal" [level=2] [ref=e68]
+          - paragraph [ref=e69]: Keys, docs, and partner onboarding
+        - generic [ref=e70]: "2"
+      - generic [ref=e71]:
+        - button "/console/api-keys B2B Developer API Key Manager Issues, copies once, revokes, and lists API key metadata. No key_hash Raw key only in success state Audit target" [ref=e72] [cursor=pointer]:
+          - generic [ref=e73]:
+            - generic [ref=e74]: /console/api-keys
+            - strong [ref=e75]: B2B Developer
+          - generic [ref=e91]:
+            - heading "API Key Manager" [level=3] [ref=e92]
+            - paragraph [ref=e93]: Issues, copies once, revokes, and lists API key metadata.
+            - generic [ref=e94]:
+              - generic [ref=e95]: No key_hash
+              - generic [ref=e96]: Raw key only in success state
+              - generic [ref=e97]: Audit target
+        - button "/console/api-docs B2B Developer API Docs Presents endpoint schema, enums, errors, and sample calls. Synthetic samples OpenAPI-compatible contract No production tenant data" [ref=e98] [cursor=pointer]:
+          - generic [ref=e99]:
+            - generic [ref=e100]: /console/api-docs
+            - strong [ref=e101]: B2B Developer
+          - generic [ref=e114]:
+            - heading "API Docs" [level=3] [ref=e115]
+            - paragraph [ref=e116]: Presents endpoint schema, enums, errors, and sample calls.
+            - generic [ref=e117]:
+              - generic [ref=e118]: Synthetic samples
+              - generic [ref=e119]: OpenAPI-compatible contract
+              - generic [ref=e120]: No production tenant data
+    - article [ref=e121]:
+      - generic [ref=e122]:
+        - generic [ref=e123]:
+          - heading "Playground" [level=2] [ref=e124]
+          - paragraph [ref=e125]: Sandbox request, response, and snippets
+        - generic [ref=e126]: "1"
+      - button "/console/playground B2B Developer Web API Playground Builds sandbox requests and previews JSON responses and code snippets. Sandbox default Field validation Production disabled" [ref=e128] [cursor=pointer]:
+        - generic [ref=e129]:
+          - generic [ref=e130]: /console/playground
+          - strong [ref=e131]: B2B Developer
+        - generic [ref=e143]:
+          - heading "Web API Playground" [level=3] [ref=e144]
+          - paragraph [ref=e145]: Builds sandbox requests and previews JSON responses and code snippets.
+          - generic [ref=e146]:
+            - generic [ref=e147]: Sandbox default
+            - generic [ref=e148]: Field validation
+            - generic [ref=e149]: Production disabled
+    - article [ref=e150]:
+      - generic [ref=e151]:
+        - generic [ref=e152]:
+          - heading "Operations" [level=2] [ref=e153]
+          - paragraph [ref=e154]: Reporting, masked logs, and human review
+        - generic [ref=e155]: "3"
+      - generic [ref=e156]:
+        - button "/console/report B2B PM PoC Report Summarizes aggregate tenant metrics and export states. Aggregate-only export No PII p95 visibility target" [ref=e157] [cursor=pointer]:
+          - generic [ref=e158]:
+            - generic [ref=e159]: /console/report
+            - strong [ref=e160]: B2B PM
+          - generic [ref=e178]:
+            - heading "PoC Report" [level=3] [ref=e179]
+            - paragraph [ref=e180]: Summarizes aggregate tenant metrics and export states.
+            - generic [ref=e181]:
+              - generic [ref=e182]: Aggregate-only export
+              - generic [ref=e183]: No PII
+              - generic [ref=e184]: p95 visibility target
+        - button "/console/ops Operator Ops Monitoring Filters masked request logs and risk/safety summaries. Masked evidence only No diagnosis wording Operator or reviewer only" [ref=e185] [cursor=pointer]:
+          - generic [ref=e186]:
+            - generic [ref=e187]: /console/ops
+            - strong [ref=e188]: Operator
+          - generic [ref=e204]:
+            - heading "Ops Monitoring" [level=3] [ref=e205]
+            - paragraph [ref=e206]: Filters masked request logs and risk/safety summaries.
+            - generic [ref=e207]:
+              - generic [ref=e208]: Masked evidence only
+              - generic [ref=e209]: No diagnosis wording
+              - generic [ref=e210]: Operator or reviewer only
+        - button "/console/ops/review-queue Reviewer Review Queue Collects high-risk, safety-filtered, timeout, and reported cases. Request-id handoff Masked evidence No raw transcript" [ref=e211] [cursor=pointer]:
+          - generic [ref=e212]:
+            - generic [ref=e213]: /console/ops/review-queue
+            - strong [ref=e214]: Reviewer
+          - generic [ref=e227]:
+            - heading "Review Queue" [level=3] [ref=e228]
+            - paragraph [ref=e229]: Collects high-risk, safety-filtered, timeout, and reported cases.
+            - generic [ref=e230]:
+              - generic [ref=e231]: Request-id handoff
+              - generic [ref=e232]: Masked evidence
+              - generic [ref=e233]: No raw transcript
+    - article [ref=e234]:
+      - generic [ref=e235]:
+        - generic [ref=e236]:
+          - heading "Governance" [level=2] [ref=e237]
+          - paragraph [ref=e238]: Consent, privacy, and route inventory
+        - generic [ref=e239]: "2"
+      - generic [ref=e240]:
+        - button "/console/consent Privacy Admin Consent Admin Displays consent dimensions, memory state, and deletion job status. Pseudonymous IDs Least privilege Audit target" [ref=e241] [cursor=pointer]:
+          - generic [ref=e242]:
+            - generic [ref=e243]: /console/consent
+            - strong [ref=e244]: Privacy Admin
+          - generic [ref=e259]:
+            - heading "Consent Admin" [level=3] [ref=e260]
+            - paragraph [ref=e261]: Displays consent dimensions, memory state, and deletion job status.
+            - generic [ref=e262]:
+              - generic [ref=e263]: Pseudonymous IDs
+              - generic [ref=e264]: Least privilege
+              - generic [ref=e265]: Audit target
+        - button "/console/route-inventory All partner roles Route Inventory Documents allowed routes and confirms out-of-scope app routes are absent. Partner Console only Scope change required for new app surfaces CI-friendly inventory" [ref=e266] [cursor=pointer]:
+          - generic [ref=e267]:
+            - generic [ref=e268]: /console/route-inventory
+            - strong [ref=e269]: All partner roles
+          - generic [ref=e282]:
+            - heading "Route Inventory" [level=3] [ref=e283]
+            - paragraph [ref=e284]: Documents allowed routes and confirms out-of-scope app routes are absent.
+            - generic [ref=e285]:
+              - generic [ref=e286]: Partner Console only
+              - generic [ref=e287]: Scope change required for new app surfaces
+              - generic [ref=e288]: CI-friendly inventory
+  - generic [ref=e289]:
+    - generic [ref=e290]:
+      - paragraph [ref=e291]: Selected card
+      - heading "Console Home" [level=2] [ref=e292]
+      - paragraph [ref=e293]: Shows tenant, role, environment, and accessible modules.
+    - generic [ref=e294]:
+      - generic [ref=e295]:
+        - heading "Route" [level=3] [ref=e296]
+        - list [ref=e297]:
+          - listitem [ref=e298]: /console
+      - generic [ref=e299]:
+        - heading "Primary user" [level=3] [ref=e300]
+        - list [ref=e301]:
+          - listitem [ref=e302]: All authenticated partner roles
+      - generic [ref=e303]:
+        - heading "Core blocks" [level=3] [ref=e304]
+        - list [ref=e305]:
+          - listitem [ref=e306]: Sidebar
+          - listitem [ref=e307]: Topbar
+          - listitem [ref=e308]: Context cards
+          - listitem [ref=e309]: Module grid
+      - generic [ref=e310]:
+        - heading "Guardrails" [level=3] [ref=e311]
+        - list [ref=e312]:
+          - listitem [ref=e313]: Role-aware navigation
+          - listitem [ref=e314]: Tenant isolation
+          - listitem [ref=e315]: No app routes outside Partner Console

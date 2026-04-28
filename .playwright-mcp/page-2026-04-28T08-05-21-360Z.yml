@@ -1,0 +1,180 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: SC
+      - generic [ref=e7]:
+        - generic [ref=e8]: SilverCare
+        - generic [ref=e9]: Partner Console
+    - navigation "Partner Console navigation" [ref=e10]:
+      - link "HM Home Available" [ref=e11] [cursor=pointer]:
+        - /url: "#/console"
+        - generic [ref=e12]: HM
+        - generic [ref=e13]:
+          - generic [ref=e14]: Home
+          - generic [ref=e15]: Available
+      - link "KEY API Keys Available" [ref=e16] [cursor=pointer]:
+        - /url: "#/console/api-keys"
+        - generic [ref=e17]: KEY
+        - generic [ref=e18]:
+          - generic [ref=e19]: API Keys
+          - generic [ref=e20]: Available
+      - link "DOC API Docs Available" [ref=e21] [cursor=pointer]:
+        - /url: "#/console/api-docs"
+        - generic [ref=e22]: DOC
+        - generic [ref=e23]:
+          - generic [ref=e24]: API Docs
+          - generic [ref=e25]: Available
+      - link "RUN Playground Available" [ref=e26] [cursor=pointer]:
+        - /url: "#/console/playground"
+        - generic [ref=e27]: RUN
+        - generic [ref=e28]:
+          - generic [ref=e29]: Playground
+          - generic [ref=e30]: Available
+      - link "RPT PoC Report Permission required" [ref=e31] [cursor=pointer]:
+        - /url: "#/console/report"
+        - generic [ref=e32]: RPT
+        - generic [ref=e33]:
+          - generic [ref=e34]: PoC Report
+          - generic [ref=e35]: Permission required
+      - link "OPS Ops Monitoring Permission required" [ref=e36] [cursor=pointer]:
+        - /url: "#/console/ops"
+        - generic [ref=e37]: OPS
+        - generic [ref=e38]:
+          - generic [ref=e39]: Ops Monitoring
+          - generic [ref=e40]: Permission required
+      - link "REV Review Queue Permission required" [ref=e41] [cursor=pointer]:
+        - /url: "#/console/ops/review-queue"
+        - generic [ref=e42]: REV
+        - generic [ref=e43]:
+          - generic [ref=e44]: Review Queue
+          - generic [ref=e45]: Permission required
+      - link "PRI Consent Admin Permission required" [ref=e46] [cursor=pointer]:
+        - /url: "#/console/consent"
+        - generic [ref=e47]: PRI
+        - generic [ref=e48]:
+          - generic [ref=e49]: Consent Admin
+          - generic [ref=e50]: Permission required
+      - link "INV Route Inventory Available" [ref=e51] [cursor=pointer]:
+        - /url: "#/console/route-inventory"
+        - generic [ref=e52]: INV
+        - generic [ref=e53]:
+          - generic [ref=e54]: Route Inventory
+          - generic [ref=e55]: Available
+    - generic [ref=e56]:
+      - generic [ref=e57]: Scope
+      - generic [ref=e59]: Partner Console only
+      - generic [ref=e60]: No consumer, institution, or elder app routes are generated.
+  - main [ref=e61]:
+    - generic [ref=e62]:
+      - generic [ref=e63]:
+        - generic [ref=e64]: /console
+        - heading "Home" [level=1] [ref=e65]
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic [ref=e68]: Tenant
+          - strong [ref=e69]: tenant_sandbox
+        - generic [ref=e70]:
+          - generic [ref=e71]: Env
+          - strong [ref=e72]: sandbox
+        - generic [ref=e73]:
+          - generic [ref=e74]: Role
+          - combobox "Role" [ref=e75]:
+            - option "B2B Developer" [selected]
+            - option "B2B PM"
+            - option "Operator"
+            - option "Reviewer"
+            - option "Privacy Admin"
+            - option "Read Only"
+    - generic [ref=e76]:
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - generic [ref=e80]:
+              - paragraph [ref=e81]: Authenticated shell
+              - heading "Console context" [level=2] [ref=e82]
+            - generic [ref=e83]: REQ-NF-036
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - term [ref=e86]: Tenant
+              - definition [ref=e87]: tenant_sandbox
+            - generic [ref=e88]:
+              - term [ref=e89]: User
+              - definition [ref=e90]: Partner Operator
+            - generic [ref=e91]:
+              - term [ref=e92]: Role
+              - definition [ref=e93]: B2B_DEV
+            - generic [ref=e94]:
+              - term [ref=e95]: Environment
+              - definition [ref=e96]: sandbox
+        - generic [ref=e97]:
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - paragraph [ref=e100]: Privacy posture
+              - heading "Default display policy" [level=2] [ref=e101]
+            - generic [ref=e102]: "PII exposure: 0"
+          - list [ref=e103]:
+            - listitem [ref=e104]: Original dialogue text is blocked by default.
+            - listitem [ref=e105]: Direct identifiers and original API keys are never shown in lists.
+            - listitem [ref=e106]: Production tenant execution is disabled in this prototype.
+            - listitem [ref=e107]: All sensitive actions are marked as audit targets.
+      - generic [ref=e108]:
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - paragraph [ref=e111]: Role-aware modules
+            - heading "Accessible surface for B2B_DEV" [level=2] [ref=e112]
+          - generic [ref=e113]: 5 modules
+        - generic [ref=e114]:
+          - article [ref=e115]:
+            - generic [ref=e116]: HM
+            - generic [ref=e117]:
+              - heading "Home" [level=3] [ref=e118]
+              - paragraph [ref=e119]: Tenant context, role, environment, and available Partner Console modules.
+              - generic [ref=e120]: available
+          - article [ref=e121]:
+            - generic [ref=e122]: KEY
+            - generic [ref=e123]:
+              - heading "API Keys" [level=3] [ref=e124]
+              - paragraph [ref=e125]: Issue, copy once, revoke, and inspect API key metadata.
+              - generic [ref=e126]: available
+          - article [ref=e127]:
+            - generic [ref=e128]: DOC
+            - generic [ref=e129]:
+              - heading "API Docs" [level=3] [ref=e130]
+              - paragraph [ref=e131]: Partner API schema, enums, errors, and code samples.
+              - generic [ref=e132]: available
+          - article [ref=e133]:
+            - generic [ref=e134]: RUN
+            - generic [ref=e135]:
+              - heading "Playground" [level=3] [ref=e136]
+              - paragraph [ref=e137]: Sandbox request builder, scenario picker, response viewer, and snippets.
+              - generic [ref=e138]: available
+          - article [ref=e139]:
+            - generic [ref=e140]: RPT
+            - generic [ref=e141]:
+              - heading "PoC Report" [level=3] [ref=e142]
+              - paragraph [ref=e143]: Period metrics and aggregate-only CSV or JSON export.
+              - generic [ref=e144]: hidden or denied
+          - article [ref=e145]:
+            - generic [ref=e146]: OPS
+            - generic [ref=e147]:
+              - heading "Ops Monitoring" [level=3] [ref=e148]
+              - paragraph [ref=e149]: Masked logs, risk analysis, alert status, and review handoff.
+              - generic [ref=e150]: hidden or denied
+          - article [ref=e151]:
+            - generic [ref=e152]: REV
+            - generic [ref=e153]:
+              - heading "Review Queue" [level=3] [ref=e154]
+              - paragraph [ref=e155]: High-risk, safety-filtered, timeout, and reported cases by request id.
+              - generic [ref=e156]: hidden or denied
+          - article [ref=e157]:
+            - generic [ref=e158]: PRI
+            - generic [ref=e159]:
+              - heading "Consent Admin" [level=3] [ref=e160]
+              - paragraph [ref=e161]: Pseudonymous user consent state, memory flag, and deletion job status.
+              - generic [ref=e162]: hidden or denied
+          - article [ref=e163]:
+            - generic [ref=e164]: INV
+            - generic [ref=e165]:
+              - heading "Route Inventory" [level=3] [ref=e166]
+              - paragraph [ref=e167]: Scope guard proving that only Partner Console routes exist.
+              - generic [ref=e168]: available
