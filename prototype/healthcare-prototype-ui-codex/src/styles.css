@@ -57,6 +57,10 @@ a {
   background: #f8faf8;
 }
 
+.landing-page .button {
+  min-height: 44px;
+}
+
 .landing-nav {
   position: sticky;
   top: 0;
