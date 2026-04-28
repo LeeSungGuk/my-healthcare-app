@@ -20,6 +20,13 @@ export const roles = [
 
 export const forbiddenRouteTerms = ["guardian", "institution", "elder-app", "elder-dashboard"];
 
+export const landingRoute = {
+  id: "landing",
+  path: "/",
+  label: "Landing",
+  description: "Public customer hook page that routes qualified visitors into the Partner Console.",
+};
+
 export const allowedRoutes = [
   {
     id: "home",
@@ -120,6 +127,10 @@ export function canAccessRoute(role, routeId) {
  * Resolve a route ID to route metadata with Home as the safe fallback.
  */
 export function getRouteById(routeId) {
+  if (routeId === landingRoute.id) {
+    return landingRoute;
+  }
+
   return allowedRoutes.find((route) => route.id === routeId) ?? allowedRoutes[0];
 }
 
@@ -128,6 +139,10 @@ export function getRouteById(routeId) {
  */
 export function routeIdFromHash(hash) {
   const cleanHash = hash.replace(/^#/, "");
+  if (cleanHash === "" || cleanHash === "/") {
+    return landingRoute.id;
+  }
+
   const found = allowedRoutes.find((route) => route.path === cleanHash);
   return found?.id ?? "home";
 }

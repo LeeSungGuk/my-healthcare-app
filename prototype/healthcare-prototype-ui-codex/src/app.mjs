@@ -144,6 +144,11 @@ function moduleIcon(id) {
  *   tests together so navigation, route inventory, and permissions stay aligned.
  */
 function render() {
+  if (state.routeId === "landing") {
+    root.innerHTML = renderLanding();
+    return;
+  }
+
   const route = getRouteById(state.routeId);
   const tenant = currentTenant();
   const canAccess = canAccessRoute(state.role, route.id);
@@ -201,6 +206,159 @@ function render() {
         </section>
       </main>
     </div>
+  `;
+}
+
+/**
+ * Render the public landing page before the protected Partner Console.
+ *
+ * Developer note:
+ * - This is the customer hook layer. It should communicate the outcome and then
+ *   route qualified visitors into `#/console`.
+ *
+ * AI agent note:
+ * - Keep the page persuasive but defensible. Do not imply clinical diagnosis,
+ *   real production readiness, or third-party endorsements that do not exist.
+ */
+function renderLanding() {
+  return `
+    <main class="landing-page">
+      <header class="landing-nav">
+        <a class="landing-brand" href="#/" aria-label="SilverCare landing home">
+          <span class="brand-mark">SC</span>
+          <span>
+            <strong>SilverCare</strong>
+            <small>Partner Console</small>
+          </span>
+        </a>
+        <nav class="landing-links" aria-label="Landing navigation">
+          <a href="#landing-workflow">Workflow</a>
+          <a href="#landing-proof">Proof</a>
+          <a href="#landing-safety">Safety</a>
+          <a class="button primary" href="#/console">Open the console</a>
+        </nav>
+      </header>
+
+      <section class="landing-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Healthcare AI operations, review ready</p>
+          <h1>Validate eldercare AI workflows without exposing sensitive data.</h1>
+          <p class="hero-subtitle">
+            A sandbox-first Partner Console for teams that need API docs, request testing, operations review, and consent visibility in one controlled surface.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary large" href="#/console">Open the console</a>
+            <a class="button large" href="#/console/route-inventory">Review route scope</a>
+          </div>
+          <div class="hero-trust-row" aria-label="Trust indicators">
+            ${landingStat("0", "default PII exposure target")}
+            ${landingStat("9", "Partner Console routes")}
+            ${landingStat("2s", "p95 initial view target")}
+          </div>
+          <p class="hero-media-caption">Background shows the actual Partner Console prototype surface: role-aware navigation, tenant context, and privacy-first module access.</p>
+        </div>
+      </section>
+
+      <section class="logo-wall" id="landing-proof" aria-label="Capability proof">
+        <span>Sandbox API</span>
+        <span>Role Guard</span>
+        <span>Masked Evidence</span>
+        <span>Consent Admin</span>
+        <span>Route Inventory</span>
+      </section>
+
+      <section class="landing-section" id="landing-workflow">
+        <div class="section-heading landing-heading">
+          <div>
+            <p class="eyebrow">A to Z workflow</p>
+            <h2>From partner API setup to privacy review in one path.</h2>
+          </div>
+          <a class="button" href="#/console/playground">Try the sandbox flow</a>
+        </div>
+        <div class="workflow-strip">
+          ${landingWorkflow("01", "Issue API key", "Create a sandbox key and copy it once without storing raw key material.")}
+          ${landingWorkflow("02", "Test safe scenarios", "Run normal, safety, and error flows through the Playground before production.")}
+          ${landingWorkflow("03", "Review operations", "Inspect masked logs, risk status, and review queue handoff by request ID.")}
+          ${landingWorkflow("04", "Check consent state", "Confirm pseudonymous consent dimensions and deletion job status.")}
+        </div>
+      </section>
+
+      <section class="landing-section split-section" id="landing-safety">
+        <div>
+          <p class="eyebrow">Safety checks</p>
+          <h2>Built for teams that cannot afford unclear privacy boundaries.</h2>
+          <p class="section-copy">
+            The prototype emphasizes verification and guardrails rather than generic AI claims. Every default path keeps production data out and makes scope visible.
+          </p>
+        </div>
+        <div class="safety-grid">
+          ${landingSafetyItem("Sandbox is the default", "Production execution is disabled unless a later scope explicitly adds controlled confirmation.")}
+          ${landingSafetyItem("One-time key reveal", "Raw API keys appear only in the issue success state and never in list rows.")}
+          ${landingSafetyItem("Masked operations view", "Ops and review surfaces use request IDs and masked evidence instead of full dialogue text.")}
+          ${landingSafetyItem("Scope guard", "Route inventory keeps consumer-facing app surfaces outside this Partner Console prototype.")}
+        </div>
+      </section>
+
+      <section class="landing-section">
+        <div class="section-heading landing-heading">
+          <div>
+            <p class="eyebrow">Value proposition</p>
+            <h2>What the team gets before real integration begins.</h2>
+          </div>
+        </div>
+        <div class="value-grid">
+          ${landingValueCard("Developers", "See schema, errors, snippets, and sandbox responses without waiting for backend setup.")}
+          ${landingValueCard("Operators", "Review masked request logs and safety states without opening raw sensitive content.")}
+          ${landingValueCard("Privacy owners", "Inspect consent and deletion state using pseudonymous identifiers only.")}
+        </div>
+      </section>
+
+      <section class="landing-final-cta">
+        <div>
+          <p class="eyebrow">Prototype review ready</p>
+          <h2>Open the console and inspect the guardrails directly.</h2>
+          <p>Use the role switcher to see how each module appears or gets blocked for different partner users.</p>
+        </div>
+        <a class="button primary large" href="#/console">Open the console</a>
+      </section>
+    </main>
+  `;
+}
+
+function landingStat(value, label) {
+  return `
+    <div class="landing-stat">
+      <strong>${escapeHtml(value)}</strong>
+      <span>${escapeHtml(label)}</span>
+    </div>
+  `;
+}
+
+function landingWorkflow(step, title, description) {
+  return `
+    <article class="workflow-card">
+      <span>${escapeHtml(step)}</span>
+      <h3>${escapeHtml(title)}</h3>
+      <p>${escapeHtml(description)}</p>
+    </article>
+  `;
+}
+
+function landingSafetyItem(title, description) {
+  return `
+    <article class="safety-card">
+      <h3>${escapeHtml(title)}</h3>
+      <p>${escapeHtml(description)}</p>
+    </article>
+  `;
+}
+
+function landingValueCard(audience, benefit) {
+  return `
+    <article class="value-card">
+      <span>${escapeHtml(audience)}</span>
+      <p>${escapeHtml(benefit)}</p>
+    </article>
   `;
 }
 
@@ -1017,7 +1175,7 @@ window.addEventListener("hashchange", () => {
 });
 
 if (!window.location.hash) {
-  window.location.hash = "/console";
+  window.location.hash = "/";
 } else {
   render();
 }

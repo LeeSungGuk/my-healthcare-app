@@ -52,6 +52,271 @@ a {
   color: inherit;
 }
 
+.landing-page {
+  min-height: 100vh;
+  background: #f8faf8;
+}
+
+.landing-nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  min-height: 72px;
+  padding: 14px 28px;
+  background: rgba(248, 250, 248, 0.9);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+}
+
+.landing-brand,
+.landing-links {
+  display: flex;
+  align-items: center;
+}
+
+.landing-brand {
+  gap: 10px;
+  text-decoration: none;
+}
+
+.landing-brand small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.landing-links {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.landing-links a:not(.button) {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.landing-hero {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: calc(100vh - 72px);
+  padding: 76px 28px 34px;
+  color: #ffffff;
+  background:
+    linear-gradient(90deg, rgba(11, 21, 19, 0.96) 0%, rgba(11, 21, 19, 0.78) 44%, rgba(11, 21, 19, 0.24) 100%),
+    url("/assets/console-home-preview.png");
+  background-position: center top;
+  background-size: cover;
+}
+
+.landing-hero::after {
+  position: absolute;
+  right: 28px;
+  bottom: 26px;
+  width: min(520px, 46vw);
+  height: 34%;
+  pointer-events: none;
+  content: "";
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  width: min(760px, 100%);
+}
+
+.landing-hero .eyebrow,
+.hero-subtitle,
+.hero-media-caption {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.landing-hero h1 {
+  max-width: 760px;
+  color: #ffffff;
+  font-size: clamp(44px, 7vw, 82px);
+  line-height: 0.98;
+}
+
+.hero-subtitle {
+  max-width: 680px;
+  margin-top: 22px;
+  font-size: 19px;
+}
+
+.hero-actions,
+.hero-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.hero-actions {
+  margin-top: 28px;
+}
+
+.hero-trust-row {
+  margin-top: 28px;
+}
+
+.hero-media-caption {
+  max-width: 620px;
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.landing-stat {
+  min-width: 168px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+}
+
+.landing-stat strong,
+.landing-stat span {
+  display: block;
+}
+
+.landing-stat strong {
+  font-size: 26px;
+}
+
+.landing-stat span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+}
+
+.logo-wall,
+.landing-section,
+.landing-final-cta {
+  width: min(1180px, calc(100% - 56px));
+  margin: 0 auto;
+}
+
+.logo-wall {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  padding: 28px 0 10px;
+}
+
+.logo-wall span {
+  display: grid;
+  place-items: center;
+  min-height: 54px;
+  color: var(--accent-strong);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.landing-section {
+  padding: 66px 0 20px;
+}
+
+.landing-heading h2,
+.split-section h2,
+.landing-final-cta h2 {
+  max-width: 760px;
+  font-size: clamp(30px, 4vw, 48px);
+}
+
+.section-copy {
+  max-width: 620px;
+  margin-top: 16px;
+  color: var(--muted);
+}
+
+.workflow-strip,
+.safety-grid,
+.value-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.workflow-strip {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.workflow-card,
+.safety-card,
+.value-card {
+  padding: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.workflow-card span,
+.value-card span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 34px;
+  height: 28px;
+  margin-bottom: 12px;
+  padding: 0 8px;
+  color: var(--accent-strong);
+  background: #d8f3e7;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.workflow-card p,
+.safety-card p,
+.value-card p,
+.landing-final-cta p {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.safety-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.value-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.landing-final-cta {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin-top: 58px;
+  margin-bottom: 72px;
+  padding: 26px;
+  color: #ffffff;
+  background: #101918;
+  border-radius: 8px;
+}
+
+.landing-final-cta .eyebrow,
+.landing-final-cta p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .app-shell {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
@@ -418,6 +683,8 @@ p {
   border: 1px solid var(--line);
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 800;
+  text-decoration: none;
 }
 
 .button:hover:not(:disabled) {
@@ -428,6 +695,12 @@ p {
   color: #ffffff;
   background: var(--accent);
   border-color: var(--accent);
+}
+
+.button.large {
+  min-height: 46px;
+  min-width: 160px;
+  padding: 11px 16px;
 }
 
 .button.compact {
@@ -610,6 +883,16 @@ textarea {
 }
 
 @media (max-width: 1120px) {
+  .logo-wall,
+  .workflow-strip,
+  .value-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .split-section {
+    grid-template-columns: 1fr;
+  }
+
   .grid.two,
   .docs-grid,
   .playground-grid,
@@ -620,6 +903,50 @@ textarea {
 }
 
 @media (max-width: 820px) {
+  .landing-nav {
+    position: relative;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 14px 18px;
+  }
+
+  .landing-links {
+    justify-content: flex-start;
+  }
+
+  .landing-hero {
+    min-height: 760px;
+    padding: 72px 18px 30px;
+    background-position: 68% top;
+  }
+
+  .landing-hero::after {
+    display: none;
+  }
+
+  .hero-trust-row,
+  .logo-wall,
+  .workflow-strip,
+  .safety-grid,
+  .value-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-stat {
+    width: 100%;
+  }
+
+  .logo-wall,
+  .landing-section,
+  .landing-final-cta {
+    width: calc(100% - 36px);
+  }
+
+  .landing-final-cta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
   .app-shell {
     grid-template-columns: 1fr;
   }

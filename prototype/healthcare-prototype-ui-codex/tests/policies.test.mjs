@@ -20,6 +20,7 @@ import {
   issueApiKey,
   listApiKeys,
   redactSensitiveText,
+  routeIdFromHash,
 } from "../src/policies.mjs";
 
 describe("Partner Console route scope", () => {
@@ -32,6 +33,13 @@ describe("Partner Console route scope", () => {
         assert.equal(route.includes(forbiddenTerm), false);
       }
     }
+  });
+
+  it("keeps the landing page outside protected console route inventory", () => {
+    assert.equal(routeIdFromHash(""), "landing");
+    assert.equal(routeIdFromHash("#/"), "landing");
+    assert.equal(routeIdFromHash("#/console"), "home");
+    assert.equal(allowedRoutes.some((route) => route.id === "landing"), false);
   });
 });
 
