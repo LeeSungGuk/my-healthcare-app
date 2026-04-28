@@ -1,5 +1,19 @@
+/**
+ * Synthetic fixture data for the SilverCare Partner Console prototype.
+ *
+ * Developer note:
+ * - These records model the API, report, operations, and consent states needed
+ *   for UI review without requiring a backend.
+ *
+ * AI agent note:
+ * - Keep this file synthetic. Do not paste real elder profiles, raw transcripts,
+ *   direct identifiers, production tenant IDs, or real API keys into fixtures.
+ */
 import { listApiKeys } from "./policies.mjs";
 
+/**
+ * Mock tenant catalog used by the topbar and route guard context.
+ */
 export const tenants = [
   {
     id: "tenant_sandbox",
@@ -9,6 +23,9 @@ export const tenants = [
   },
 ];
 
+/**
+ * Mock authenticated session. Role can be changed in the UI role switcher.
+ */
 export const session = {
   userId: "user_partner_001",
   displayName: "Partner Operator",
@@ -16,6 +33,9 @@ export const session = {
   defaultRole: "B2B_DEV",
 };
 
+/**
+ * Safe API key list rows. `listApiKeys()` strips key hash material before export.
+ */
 export const apiKeyRecords = listApiKeys([
   {
     apiKeyId: "key_alpha_01",
@@ -37,6 +57,9 @@ export const apiKeyRecords = listApiKeys([
   },
 ]);
 
+/**
+ * OpenAPI-like endpoint metadata used by API Docs and Playground defaults.
+ */
 export const apiEndpoints = [
   {
     id: "chat-reply",
@@ -88,6 +111,9 @@ export const apiEndpoints = [
   },
 ];
 
+/**
+ * Shared enum and standard error fixtures for API Docs.
+ */
 export const enumDefinitions = [
   { name: "risk_level", values: ["low", "medium", "high", "critical"] },
   { name: "recommended_action", values: ["none", "check_in", "review", "urgent_review"] },
@@ -101,6 +127,10 @@ export const standardErrors = [
   { code: "QUOTA_EXCEEDED", http: 429, retryable: true, meaning: "The sandbox quota was exceeded." },
 ];
 
+/**
+ * Sandbox-only scenarios for fast reviewer walkthrough of normal, safety, and
+ * error states.
+ */
 export const playgroundScenarios = [
   {
     id: "normal",
@@ -145,6 +175,9 @@ export const playgroundScenarios = [
   },
 ];
 
+/**
+ * Mock execution results keyed by scenario ID for the Response Viewer.
+ */
 export const playgroundResponses = {
   normal: {
     status: 200,
@@ -182,6 +215,10 @@ export const playgroundResponses = {
   },
 };
 
+/**
+ * Aggregate-only report fixtures. No row-level user or conversation data lives
+ * in this dataset.
+ */
 export const pocMetrics = [
   {
     period: "last_7_days",
@@ -203,6 +240,10 @@ export const pocMetrics = [
   },
 ];
 
+/**
+ * Masked operational log fixtures. Evidence is intentionally excerpted and
+ * redacted for privacy review.
+ */
 export const opsLogs = [
   {
     requestId: "req_sandbox_1002",
@@ -248,6 +289,9 @@ export const opsLogs = [
   },
 ];
 
+/**
+ * Pseudonymous consent and deletion job fixtures for Privacy Admin review.
+ */
 export const consentRecords = [
   {
     elderId: "elder_demo_01",

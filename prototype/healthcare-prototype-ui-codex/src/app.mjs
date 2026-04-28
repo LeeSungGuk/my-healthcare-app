@@ -1,3 +1,19 @@
+/**
+ * SilverCare Partner Console prototype renderer.
+ *
+ * Developer note:
+ * - This file intentionally keeps the prototype dependency-free: no build step,
+ *   no framework runtime, and no real API calls.
+ * - Screen rendering is centralized here so reviewers can inspect the complete
+ *   UI flow in one place during the prototype phase.
+ *
+ * AI agent note:
+ * - Preserve the boundary between this renderer, `policies.mjs`, and
+ *   `mock-data.mjs`. Policy behavior should be changed in `policies.mjs`,
+ *   fixture shape in `mock-data.mjs`, and visual composition here.
+ * - Do not add guardian, institution, or elder-facing app routes without an
+ *   explicit scope change.
+ */
 import {
   allowedRoutes,
   canAccessRoute,
@@ -26,6 +42,17 @@ import {
 
 const root = document.querySelector("#app");
 
+/**
+ * In-memory UI state for the static SPA.
+ *
+ * Developer note:
+ * - This is deliberately volatile state. Refreshing the page should clear
+ *   transient values such as one-time API key reveal and playground responses.
+ *
+ * AI agent note:
+ * - Do not persist `oneTimeKey` to localStorage/sessionStorage. The one-time
+ *   reveal behavior is a security requirement, not just a UI flourish.
+ */
 const state = {
   role: session.defaultRole,
   routeId: routeIdFromHash(window.location.hash || "#/console"),
@@ -105,6 +132,17 @@ function moduleIcon(id) {
   return icons[id] ?? "UI";
 }
 
+/**
+ * Render the full application shell for the active hash route and selected role.
+ *
+ * Developer note:
+ * - All route content passes through `canAccessRoute()` before screen-specific
+ *   markup is rendered.
+ *
+ * AI agent note:
+ * - If you add a new screen, update `allowedRoutes`, `renderRoute()`, docs, and
+ *   tests together so navigation, route inventory, and permissions stay aligned.
+ */
 function render() {
   const route = getRouteById(state.routeId);
   const tenant = currentTenant();
@@ -180,6 +218,16 @@ function renderNavItem(route) {
   `;
 }
 
+/**
+ * Render route-specific content for the current navigation target.
+ *
+ * Developer note:
+ * - The renderer map is the component boundary for this prototype.
+ *
+ * AI agent note:
+ * - Keep this list Partner Console-only. Consumer app surfaces belong outside
+ *   this prototype unless PRD/SRS scope changes are made first.
+ */
 function renderRoute(routeId) {
   const views = {
     home: renderHome,
@@ -196,6 +244,17 @@ function renderRoute(routeId) {
   return (views[routeId] ?? renderHome)();
 }
 
+/**
+ * Render a denied state instead of partially rendering protected data.
+ *
+ * Developer note:
+ * - This should remain a full-state replacement, not an inline warning beside
+ *   hidden content.
+ *
+ * AI agent note:
+ * - Never leak table rows, metrics, consent records, or logs when this branch is
+ *   selected.
+ */
 function renderPermissionDenied(route) {
   return `
     <div class="empty-state">
@@ -480,6 +539,17 @@ function renderPlayground() {
   `;
 }
 
+/**
+ * Render the current playground execution result.
+ *
+ * Developer note:
+ * - The viewer displays structured JSON for debugging but uses synthetic
+ *   response fixtures only.
+ *
+ * AI agent note:
+ * - Do not render raw transcript, direct identifiers, or original API keys here.
+ *   If new response fields are added, confirm they are safe display fields first.
+ */
 function renderResponseViewer() {
   if (!state.response) {
     return `<div class="empty-state slim">Run a sandbox scenario to inspect status, latency, request id, risk fields, and standard errors.</div>`;
@@ -722,10 +792,32 @@ function renderRouteInventory() {
   `;
 }
 
+/**
+ * Build a sample request payload from endpoint field metadata.
+ *
+ * Developer note:
+ * - This mirrors the API Docs samples and keeps Playground defaults in sync with
+ *   endpoint metadata.
+ *
+ * AI agent note:
+ * - Keep samples sandbox-only. Production tenant IDs should not appear in this
+ *   prototype.
+ */
 function samplePayload(endpoint) {
   return Object.fromEntries(endpoint.requestFields.map((field) => [field.name, field.sample]));
 }
 
+/**
+ * Validate the playground JSON request before enabling execution/snippets.
+ *
+ * Developer note:
+ * - This is intentionally minimal for the prototype. A product version should
+ *   derive validation from the OpenAPI-compatible contract.
+ *
+ * AI agent note:
+ * - The sandbox tenant check is a guardrail. Do not remove it when changing
+ *   endpoint fields or sample payloads.
+ */
 function validateRequest() {
   const endpoint = selectedEndpoint();
   const errors = [];
@@ -750,6 +842,15 @@ function validateRequest() {
   return { payload, errors };
 }
 
+/**
+ * Generate a documentation-safe cURL snippet for the active request.
+ *
+ * Developer note:
+ * - The snippet is for partner developer onboarding and mirrors API Docs output.
+ *
+ * AI agent note:
+ * - Use `<SILVERCARE_API_KEY>` only. Never interpolate `state.oneTimeKey`.
+ */
 function makeCurl(endpoint, payload) {
   return [
     `curl -X ${endpoint.method} https://api.silvercare.example${endpoint.path} \\`,
@@ -759,6 +860,16 @@ function makeCurl(endpoint, payload) {
   ].join("\n");
 }
 
+/**
+ * Generate a documentation-safe TypeScript fetch snippet for the active request.
+ *
+ * Developer note:
+ * - This is a copyable sample, not an SDK implementation.
+ *
+ * AI agent note:
+ * - Keep credentials as environment placeholders. Do not embed generated keys or
+ *   production tenant payloads.
+ */
 function makeTypeScript(endpoint, payload) {
   return [
     `const response = await fetch("https://api.silvercare.example${endpoint.path}", {`,
@@ -773,6 +884,17 @@ function makeTypeScript(endpoint, payload) {
   ].join("\n");
 }
 
+/**
+ * Apply a sandbox scenario to the selected endpoint and request editor.
+ *
+ * Developer note:
+ * - Scenario selection is the primary path for reviewers to exercise normal,
+ *   safety, and error states quickly.
+ *
+ * AI agent note:
+ * - Scenarios must stay synthetic and must not reference real elder profiles or
+ *   direct identifiers.
+ */
 function applyScenario(scenarioId) {
   const scenario = playgroundScenarios.find((item) => item.id === scenarioId) ?? playgroundScenarios[0];
   state.selectedScenarioId = scenario.id;
@@ -781,6 +903,16 @@ function applyScenario(scenarioId) {
   state.response = null;
 }
 
+/**
+ * Handle all prototype UI actions from delegated click events.
+ *
+ * Developer note:
+ * - Actions mutate the in-memory state then re-render the shell.
+ *
+ * AI agent note:
+ * - Security-sensitive actions here are mocks. Preserve audit-facing UI labels
+ *   and one-time key behavior even when adding new actions.
+ */
 function handleAction(action, target) {
   if (action === "issue-key") {
     const issued = issueApiKey(session.tenantId, state.role);

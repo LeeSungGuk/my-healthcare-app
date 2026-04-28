@@ -1,3 +1,14 @@
+/**
+ * Shared UI policy layer for the SilverCare Partner Console prototype.
+ *
+ * Developer note:
+ * - Keep role, route, redaction, and API key reveal rules here so tests can
+ *   verify them without rendering the DOM.
+ *
+ * AI agent note:
+ * - Treat this file as the guardrail boundary. New screens should consume these
+ *   helpers instead of reimplementing permission or privacy checks inline.
+ */
 export const roles = [
   { id: "B2B_DEV", label: "B2B Developer" },
   { id: "B2B_PM", label: "B2B PM" },
@@ -75,25 +86,62 @@ export const allowedRoutes = [
   },
 ];
 
+/**
+ * Return the modules visible to a selected mock role.
+ *
+ * Developer note:
+ * - This drives both navigation availability and the Console Home module grid.
+ *
+ * AI agent note:
+ * - When role labels or routes change, update tests so permission drift is
+ *   caught before reviewer handoff.
+ */
 export function getModulesForRole(role) {
   return allowedRoutes.filter((route) => route.roles.includes(role));
 }
 
+/**
+ * Check whether a role may render a route's protected content.
+ *
+ * Developer note:
+ * - Route visibility and route access intentionally share the same route
+ *   metadata in this prototype.
+ *
+ * AI agent note:
+ * - Keep this as a hard gate. Do not partially render protected route content
+ *   and hide pieces afterward.
+ */
 export function canAccessRoute(role, routeId) {
   const route = allowedRoutes.find((item) => item.id === routeId);
   return Boolean(route?.roles.includes(role));
 }
 
+/**
+ * Resolve a route ID to route metadata with Home as the safe fallback.
+ */
 export function getRouteById(routeId) {
   return allowedRoutes.find((route) => route.id === routeId) ?? allowedRoutes[0];
 }
 
+/**
+ * Convert a URL hash path into the internal route ID used by the renderer.
+ */
 export function routeIdFromHash(hash) {
   const cleanHash = hash.replace(/^#/, "");
   const found = allowedRoutes.find((route) => route.path === cleanHash);
   return found?.id ?? "home";
 }
 
+/**
+ * Confirm that all known routes stay inside the Partner Console scope.
+ *
+ * Developer note:
+ * - This is the route inventory test hook.
+ *
+ * AI agent note:
+ * - Add any new out-of-scope term to `forbiddenRouteTerms` before adding route
+ *   inventory tests for it.
+ */
 export function isRouteInventoryClean(routes = allowedRoutes) {
   return routes.every((route) => {
     const path = route.path.toLowerCase();
@@ -101,6 +149,17 @@ export function isRouteInventoryClean(routes = allowedRoutes) {
   });
 }
 
+/**
+ * Redact common direct identifiers and API key patterns from display strings.
+ *
+ * Developer note:
+ * - This helper is prototype-grade and pattern-based. Product code should use a
+ *   stricter privacy pipeline.
+ *
+ * AI agent note:
+ * - When adding new sample data fields, call this helper before display unless
+ *   the field is already known to be safe synthetic data.
+ */
 export function redactSensitiveText(value) {
   return String(value)
     .replace(/name:\s*[^|]+/gi, "name: [redacted]")
@@ -111,6 +170,9 @@ export function redactSensitiveText(value) {
     .replace(/\b\d{6}-\d{7}\b/g, "[id-redacted]");
 }
 
+/**
+ * Redact sensitive record fields while preserving safe metadata.
+ */
 export function sanitizeRecord(record) {
   return Object.fromEntries(
     Object.entries(record).map(([key, value]) => {
@@ -127,6 +189,17 @@ export function sanitizeRecord(record) {
   );
 }
 
+/**
+ * Issue a mock sandbox API key with a one-time raw key plus safe list metadata.
+ *
+ * Developer note:
+ * - The raw key is returned only in the action result, while `record` contains a
+ *   hash that must be removed before list rendering.
+ *
+ * AI agent note:
+ * - Do not store `rawKey` in mock records or UI state beyond the one-time reveal
+ *   branch.
+ */
 export function issueApiKey(tenantId, actorRole) {
   if (actorRole !== "B2B_DEV") {
     throw new Error("API key issuing requires B2B_DEV role");
@@ -149,10 +222,16 @@ export function issueApiKey(tenantId, actorRole) {
   };
 }
 
+/**
+ * Strip raw and hashed key material from API key rows before rendering.
+ */
 export function listApiKeys(records) {
   return records.map(({ keyHash, rawKey, ...safeRecord }) => safeRecord);
 }
 
+/**
+ * Format latency consistently across Playground, Report, and Ops surfaces.
+ */
 export function formatLatency(ms) {
   return `${Number(ms).toLocaleString()} ms`;
 }

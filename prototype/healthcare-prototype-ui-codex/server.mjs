@@ -1,3 +1,14 @@
+/**
+ * Dependency-free static server for the SilverCare Partner Console prototype.
+ *
+ * Developer note:
+ * - Serves local files directly and falls back to `index.html` so hash/Spa
+ *   navigation remains review-friendly.
+ *
+ * AI agent note:
+ * - Keep this server narrow. It is not an API server, auth server, proxy, or
+ *   production deployment target.
+ */
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
@@ -15,6 +26,16 @@ const mimeTypes = {
   ".svg": "image/svg+xml",
 };
 
+/**
+ * Normalize request paths before reading files from the project directory.
+ *
+ * Developer note:
+ * - Root requests resolve to `index.html`.
+ *
+ * AI agent note:
+ * - Preserve path normalization if adding asset types. Do not allow directory
+ *   traversal outside the prototype root.
+ */
 function safePath(url) {
   const rawPath = new URL(url, `http://localhost:${port}`).pathname;
   const decoded = decodeURIComponent(rawPath);

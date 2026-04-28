@@ -1,3 +1,15 @@
+/**
+ * Policy regression tests for the SilverCare Partner Console prototype.
+ *
+ * Developer note:
+ * - Tests focus on behavior that would be expensive or risky to catch by visual
+ *   inspection alone: route scope, role access, privacy redaction, and API key
+ *   one-time reveal semantics.
+ *
+ * AI agent note:
+ * - When changing routes, roles, or sensitive display behavior, update these
+ *   tests first and verify the failure before changing implementation.
+ */
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
