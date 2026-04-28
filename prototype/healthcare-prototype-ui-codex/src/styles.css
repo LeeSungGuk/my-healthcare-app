@@ -95,7 +95,14 @@ a {
   gap: 14px;
 }
 
+.landing-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 .landing-links a:not(.button) {
+  padding: 0 2px;
   color: var(--muted);
   font-size: 14px;
   font-weight: 700;
@@ -907,6 +914,11 @@ textarea {
 
   .landing-links {
     justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .landing-links a:not(.button) {
+    padding: 0 8px;
   }
 
   .landing-hero {
