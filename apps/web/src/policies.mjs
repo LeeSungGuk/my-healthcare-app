@@ -27,6 +27,22 @@ export const landingRoute = {
   description: "Public customer hook page that routes qualified visitors into the Partner Console.",
 };
 
+export const publicRoutes = [
+  landingRoute,
+  {
+    id: "login",
+    path: "/login",
+    label: "Partner Login",
+    description: "Public authentication entry before opening the Partner Console.",
+  },
+  {
+    id: "request-access",
+    path: "/request-access",
+    label: "Request Access",
+    description: "Partner application and demo request entry for invite-based onboarding.",
+  },
+];
+
 export const allowedRoutes = [
   {
     id: "home",
@@ -55,6 +71,13 @@ export const allowedRoutes = [
     label: "Playground",
     description: "Sandbox request builder, scenario picker, response viewer, and snippets.",
     roles: ["B2B_DEV"],
+  },
+  {
+    id: "safety",
+    path: "/console/safety",
+    label: "Privacy & Safety",
+    description: "Safety overview placeholder for privacy, consent, masking, review, and guardrail evidence.",
+    roles: ["B2B_DEV", "B2B_PM", "OPERATOR", "REVIEWER", "PRIVACY_ADMIN", "READ_ONLY"],
   },
   {
     id: "report",
@@ -127,8 +150,9 @@ export function canAccessRoute(role, routeId) {
  * Resolve a route ID to route metadata with Home as the safe fallback.
  */
 export function getRouteById(routeId) {
-  if (routeId === landingRoute.id) {
-    return landingRoute;
+  const publicRoute = publicRoutes.find((route) => route.id === routeId);
+  if (publicRoute) {
+    return publicRoute;
   }
 
   return allowedRoutes.find((route) => route.id === routeId) ?? allowedRoutes[0];
@@ -141,6 +165,11 @@ export function routeIdFromHash(hash) {
   const cleanHash = hash.replace(/^#/, "");
   if (cleanHash === "" || cleanHash === "/") {
     return landingRoute.id;
+  }
+
+  const publicRoute = publicRoutes.find((route) => route.path === cleanHash);
+  if (publicRoute) {
+    return publicRoute.id;
   }
 
   const found = allowedRoutes.find((route) => route.path === cleanHash);

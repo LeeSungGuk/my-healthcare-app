@@ -19,6 +19,7 @@ import {
   getModulesForRole,
   issueApiKey,
   listApiKeys,
+  publicRoutes,
   redactSensitiveText,
   routeIdFromHash,
 } from "../src/policies.mjs";
@@ -41,13 +42,19 @@ describe("Partner Console route scope", () => {
     assert.equal(routeIdFromHash("#/console"), "home");
     assert.equal(allowedRoutes.some((route) => route.id === "landing"), false);
   });
+
+  it("keeps public auth and access routes outside protected console route inventory", () => {
+    assert.equal(routeIdFromHash("#/login"), "login");
+    assert.equal(routeIdFromHash("#/request-access"), "request-access");
+    assert.equal(allowedRoutes.some((route) => publicRoutes.some((publicRoute) => publicRoute.id === route.id)), false);
+  });
 });
 
 describe("role module visibility", () => {
   it("gives B2B developers access to key, docs, and playground modules", () => {
     const modules = getModulesForRole("B2B_DEV").map((module) => module.id);
 
-    assert.deepEqual(modules, ["home", "api-keys", "api-docs", "playground", "route-inventory"]);
+    assert.deepEqual(modules, ["home", "api-keys", "api-docs", "playground", "safety", "route-inventory"]);
   });
 
   it("does not expose privacy admin modules to read only users", () => {

@@ -68,6 +68,7 @@ const state = {
   exportNotice: "",
   opsFilter: "all",
   deletionRequestId: null,
+  accessRequestSubmitted: false,
 };
 
 const escapeMap = {
@@ -123,6 +124,7 @@ function moduleIcon(id) {
     "api-keys": "KEY",
     "api-docs": "DOC",
     playground: "RUN",
+    safety: "SAFE",
     report: "RPT",
     ops: "OPS",
     "review-queue": "REV",
@@ -146,6 +148,16 @@ function moduleIcon(id) {
 function render() {
   if (state.routeId === "landing") {
     root.innerHTML = renderLanding();
+    return;
+  }
+
+  if (state.routeId === "login") {
+    root.innerHTML = renderLogin();
+    return;
+  }
+
+  if (state.routeId === "request-access") {
+    root.innerHTML = renderRequestAccess();
     return;
   }
 
@@ -238,10 +250,10 @@ function renderLanding() {
           </span>
         </a>
         <nav class="landing-links" aria-label="랜딩 내비게이션">
-          <a href="#landing-workflow">진행 흐름</a>
-          <a href="#landing-proof">검증 근거</a>
-          <a href="#landing-safety">안전성</a>
-          <a class="button primary" href="#/console">콘솔 열기</a>
+          <a href="#/console/playground">API 흐름</a>
+          <a href="#/console/route-inventory">검증 결과</a>
+          <a href="#/console/safety">안전성</a>
+          <a class="button primary" href="#/login">로그인</a>
         </nav>
       </header>
 
@@ -253,8 +265,8 @@ function renderLanding() {
             API 문서, 요청 테스트, 운영 리뷰, 동의 상태 확인을 위한 파트너 콘솔입니다.
           </p>
           <div class="hero-actions">
-            <a class="button primary large" href="#/console">콘솔 열기</a>
-            <a class="button large" href="#/console/route-inventory">경로 범위 확인</a>
+            <a class="button primary large" href="#/login">콘솔 로그인</a>
+            <a class="button large" href="#/request-access">파트너 신청</a>
           </div>
           <div class="hero-trust-row" aria-label="신뢰 지표">
             ${landingStat("안전", "개인정보 노출 최소화")}
@@ -264,9 +276,9 @@ function renderLanding() {
         </div>
       </section>
 
-      <section class="proof-panel" id="landing-proof" aria-label="검증 근거">
+      <section class="proof-panel" id="landing-proof" aria-label="검증 결과">
         <div class="proof-intro">
-          <p class="eyebrow">검증 근거</p>
+          <p class="eyebrow">검증 결과</p>
           <h2>안전하다고 말하는 대신, 확인 가능한 상태를 먼저 보여줍니다.</h2>
         </div>
         <div class="proof-grid">
@@ -280,7 +292,7 @@ function renderLanding() {
       <section class="landing-section" id="landing-workflow">
         <div class="section-heading landing-heading">
           <div>
-            <p class="eyebrow">전체 검증 흐름</p>
+            <p class="eyebrow">API 흐름</p>
             <h2>파트너 API 설정부터 개인정보 검토까지 한 흐름으로 확인합니다.</h2>
           </div>
           <a class="button" href="#/console/playground">샌드박스 흐름 체험</a>
@@ -329,7 +341,129 @@ function renderLanding() {
           <h2>콘솔을 열고 가드레일을 직접 확인하세요.</h2>
           <p>역할 전환기를 사용해 파트너 사용자 유형별로 어떤 모듈이 보이거나 차단되는지 확인할 수 있습니다.</p>
         </div>
-        <a class="button primary large" href="#/console">콘솔 열기</a>
+        <a class="button primary large" href="#/login">콘솔 로그인</a>
+      </section>
+    </main>
+  `;
+}
+
+function renderPublicHeader(active = "") {
+  return `
+    <header class="landing-nav auth-nav">
+      <a class="landing-brand" href="#/" aria-label="SilverCare 랜딩 홈">
+        <span class="brand-mark logo-mark">
+          <img class="brand-logo" src="/assets/brand/silvercare-main-logo.png" alt="" />
+        </span>
+        <span>
+          <strong>SilverCare</strong>
+          <small>파트너 콘솔</small>
+        </span>
+      </a>
+      <nav class="landing-links" aria-label="인증 내비게이션">
+        <a class="${active === "request-access" ? "active-link" : ""}" href="#/request-access">파트너 신청</a>
+        <a class="button ${active === "login" ? "primary" : ""}" href="#/login">로그인</a>
+      </nav>
+    </header>
+  `;
+}
+
+function renderLogin() {
+  return `
+    <main class="auth-page">
+      ${renderPublicHeader("login")}
+      <section class="auth-shell">
+        <div class="auth-copy">
+          <p class="eyebrow">Partner Access</p>
+          <h1>승인된 파트너만 콘솔에 접근합니다.</h1>
+          <p>
+            API Key, Playground, PoC Report, 운영 로그, 동의 상태는 초대된 파트너 계정에서만 확인하도록 설계합니다.
+          </p>
+          <div class="auth-proof-row">
+            ${badge("Invite based", "success")}
+            ${badge("Sandbox first", "success")}
+            ${badge("Role guarded", "neutral")}
+          </div>
+        </div>
+        <section class="auth-card" aria-label="파트너 로그인">
+          <p class="eyebrow">Login</p>
+          <h2>파트너 로그인</h2>
+          <div class="auth-form">
+            <label class="field-stack">
+              <span>업무 이메일</span>
+              <input class="input-field" type="email" value="developer@partner.example" autocomplete="email" />
+            </label>
+            <label class="field-stack">
+              <span>비밀번호</span>
+              <input class="input-field" type="password" value="silvercare-demo" autocomplete="current-password" />
+            </label>
+            <button class="button primary large" type="button" data-action="mock-login">데모 계정으로 콘솔 열기</button>
+          </div>
+          <p class="auth-note">
+            계정이 없다면 <a class="text-link" href="#/request-access">파트너 신청</a>을 먼저 진행합니다.
+          </p>
+        </section>
+      </section>
+    </main>
+  `;
+}
+
+function renderRequestAccess() {
+  return `
+    <main class="auth-page">
+      ${renderPublicHeader("request-access")}
+      <section class="auth-shell request-shell">
+        <div class="auth-copy">
+          <p class="eyebrow">Request Access</p>
+          <h1>일반 회원가입 대신 파트너 신청으로 시작합니다.</h1>
+          <p>
+            SilverCare는 B2B2C API/SaaS 제품입니다. 파트너 기기, PoC 범위, 개인정보 처리 책임을 먼저 확인한 뒤 콘솔 계정을 발급합니다.
+          </p>
+          <ul class="auth-points">
+            <li>파트너사와 사용 사례를 먼저 확인합니다.</li>
+            <li>승인 후 초대 기반 계정으로 콘솔 접근을 엽니다.</li>
+            <li>초기 연동은 sandbox tenant와 synthetic data로 제한합니다.</li>
+          </ul>
+        </div>
+        <section class="auth-card" aria-label="파트너 신청">
+          ${
+            state.accessRequestSubmitted
+              ? `
+                <div class="request-success">
+                  ${badge("request captured", "success")}
+                  <h2>파트너 신청이 기록되었습니다.</h2>
+                  <p>프로토타입에서는 실제 전송 없이 신청 완료 상태만 표시합니다. 다음 단계에서는 내부 승인 후 초대 계정을 발급합니다.</p>
+                  <a class="button primary" href="#/login">로그인 화면으로 이동</a>
+                </div>
+              `
+              : `
+                <p class="eyebrow">Partner Application</p>
+                <h2>파트너 신청</h2>
+                <div class="auth-form">
+                  <label class="field-stack">
+                    <span>회사명</span>
+                    <input class="input-field" type="text" value="Demo Robotics" autocomplete="organization" />
+                  </label>
+                  <label class="field-stack">
+                    <span>업무 이메일</span>
+                    <input class="input-field" type="email" value="partnership@example.com" autocomplete="email" />
+                  </label>
+                  <label class="field-stack">
+                    <span>연동 목적</span>
+                    <select class="input-field">
+                      <option>시니어 대화 API PoC</option>
+                      <option>돌봄 기기 연동 검토</option>
+                      <option>운영/안전성 검증</option>
+                    </select>
+                  </label>
+                  <label class="field-stack">
+                    <span>검토 메모</span>
+                    <textarea class="input-field auth-textarea">파트너 기기에서 캐릭터 챗 API와 안전 응답 정책을 검증하고 싶습니다.</textarea>
+                  </label>
+                  <button class="button primary large" type="button" data-action="submit-access-request">신청 상태 확인</button>
+                </div>
+              `
+          }
+        </section>
       </section>
     </main>
   `;
@@ -412,6 +546,7 @@ function renderRoute(routeId) {
     "api-keys": renderApiKeys,
     "api-docs": renderApiDocs,
     playground: renderPlayground,
+    safety: renderSafety,
     report: renderReport,
     ops: renderOps,
     "review-queue": renderReviewQueue,
@@ -750,6 +885,53 @@ function renderSnippets(endpoint, payload) {
       <pre><code>${escapeHtml(makeCurl(endpoint, payload))}</code></pre>
       <pre><code>${escapeHtml(makeTypeScript(endpoint, payload))}</code></pre>
     </div>
+  `;
+}
+
+function renderSafety() {
+  return `
+    <section class="empty-state safety-placeholder">
+      <div class="empty-icon">SAFE</div>
+      <p class="eyebrow">Privacy & Safety</p>
+      <h2>안전성 페이지를 준비 중입니다.</h2>
+      <p>
+        이 화면은 개인정보 마스킹, 동의/삭제 상태, 안전 응답 정책, 운영 리뷰 큐, 라우트 범위 검증을 한곳에서 요약하는 Safety Overview로 확장될 예정입니다.
+      </p>
+      <div class="safety-link-grid">
+        <article class="safety-link-card">
+          <div class="module-icon">PLY</div>
+          <div>
+            <h3>Sandbox Safety Path</h3>
+            <p>Playground에서 정상, 안전, 오류 시나리오를 synthetic data로 실행합니다.</p>
+            <a class="text-link" href="#/console/playground">Open Playground</a>
+          </div>
+        </article>
+        <article class="safety-link-card">
+          <div class="module-icon">OPS</div>
+          <div>
+            <h3>Masked Ops Evidence</h3>
+            <p>운영 로그와 리뷰 큐는 request id, risk level, 마스킹된 근거 중심으로 검토합니다.</p>
+            <a class="text-link" href="#/console/ops">Open Ops Monitoring</a>
+          </div>
+        </article>
+        <article class="safety-link-card">
+          <div class="module-icon">PRI</div>
+          <div>
+            <h3>Consent Boundary</h3>
+            <p>가명 ID, 동의 상태, 메모리 사용 여부, 삭제 작업 상태를 권한 기반으로 확인합니다.</p>
+            <a class="text-link" href="#/console/consent">Open Consent Admin</a>
+          </div>
+        </article>
+        <article class="safety-link-card">
+          <div class="module-icon">INV</div>
+          <div>
+            <h3>Route Scope Guard</h3>
+            <p>Partner Console 범위 밖의 guardian, institution, elder app route가 섞이지 않았는지 확인합니다.</p>
+            <a class="text-link" href="#/console/route-inventory">Open Route Inventory</a>
+          </div>
+        </article>
+      </div>
+    </section>
   `;
 }
 
@@ -1092,6 +1274,15 @@ function applyScenario(scenarioId) {
  *   and one-time key behavior even when adding new actions.
  */
 function handleAction(action, target) {
+  if (action === "mock-login") {
+    state.routeId = "home";
+    window.location.hash = "#/console";
+  }
+
+  if (action === "submit-access-request") {
+    state.accessRequestSubmitted = true;
+  }
+
   if (action === "issue-key") {
     const issued = issueApiKey(session.tenantId, state.role);
     state.oneTimeKey = issued.rawKey;
