@@ -157,7 +157,9 @@ function render() {
     <div class="app-shell">
       <aside class="sidebar">
         <div class="brand">
-          <div class="brand-mark">SC</div>
+          <div class="brand-mark logo-mark">
+            <img class="brand-logo" src="/assets/brand/silvercare-main-logo.png" alt="" />
+          </div>
           <div>
             <div class="brand-title">SilverCare</div>
             <div class="brand-subtitle">Partner Console</div>
@@ -227,7 +229,9 @@ function renderLanding() {
     <main class="landing-page">
       <header class="landing-nav">
         <a class="landing-brand" href="#/" aria-label="SilverCare 랜딩 홈">
-          <span class="brand-mark">SC</span>
+          <span class="brand-mark logo-mark">
+            <img class="brand-logo" src="/assets/brand/silvercare-main-logo.png" alt="" />
+          </span>
           <span>
             <strong>SilverCare</strong>
             <small>파트너 콘솔</small>

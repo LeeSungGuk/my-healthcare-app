@@ -415,6 +415,19 @@ a {
   flex: 0 0 auto;
 }
 
+.logo-mark {
+  overflow: hidden;
+  background: #fffaf3;
+  border: 1px solid rgba(15, 85, 71, 0.12);
+}
+
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.18);
+}
+
 .brand-title {
   font-weight: 800;
 }
