@@ -147,6 +147,7 @@ my-healthcare-app
 │   ├── assets
 │   ├── code-quality-evaluation.md
 │   ├── component-structure-analysis.md
+│   ├── design
 │   ├── history
 │   ├── landing-page-checklist-evaluation.md
 │   └── master-prompt.md
@@ -188,6 +189,7 @@ The major scripts now include JSDoc-style comments written for both human develo
 ## Documentation
 
 - [`docs/master-prompt.md`](docs/master-prompt.md): original prototype generation prompt.
+- [`docs/design/README.md`](docs/design/README.md): product UI, design folder, and wireframe review app ownership rules.
 - [`docs/component-structure-analysis.md`](docs/component-structure-analysis.md): component hierarchy, Mermaid chart, current structure, and improvement points.
 - [`docs/code-quality-evaluation.md`](docs/code-quality-evaluation.md): code quality score, strengths, risks, and recommended quality gates.
 - [`docs/landing-page-checklist-evaluation.md`](docs/landing-page-checklist-evaluation.md): landing strategy checklist, type diagnosis, and launch-readiness gaps.
