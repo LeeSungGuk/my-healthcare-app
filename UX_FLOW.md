@@ -1,8 +1,8 @@
 # SilverCare Partner Console UX Flow
 
-검사용 UX flow 요약 문서입니다. 아래 이미지는 현재 `healthcare-figma-wireframe-cards` 프로젝트의 전체 와이어프레임 카드 보드 프리뷰를 루트 문서 옆에 복사한 것입니다.
+검사용 UX flow 요약 문서입니다. 아래 이미지는 현재 `apps/wireframe-cards` 프로젝트의 전체 와이어프레임 카드 보드 프리뷰를 문서 자산으로 복사한 것입니다.
 
-![SilverCare Partner Console wireframe card board](./wireframe-card-board-preview.png)
+![SilverCare Partner Console wireframe card board](./docs/assets/wireframe-card-board-preview.png)
 
 ## Purpose
 
@@ -18,7 +18,7 @@
 
 ## Component Tree
 
-아래 component tree는 루트 실행형 UI 프로젝트만 대상으로 한다. `healthcare-figma-wireframe-cards` 카드 보드 프로젝트는 제외한다.
+아래 component tree는 `apps/web` 실행형 UI 프로젝트만 대상으로 한다. `apps/wireframe-cards` 카드 보드 프로젝트는 제외한다.
 
 ```mermaid
 flowchart TD
@@ -120,5 +120,5 @@ flowchart TD
 
 ## Source Projects
 
-- 루트 프로젝트: 실행형 Partner Console UI prototype
-- `healthcare-figma-wireframe-cards`: Figma 스타일 wireframe card board
+- `apps/web`: 실행형 Partner Console UI prototype
+- `apps/wireframe-cards`: Figma 스타일 wireframe card board

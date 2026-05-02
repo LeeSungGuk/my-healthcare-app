@@ -14,7 +14,7 @@
 | --- | --- | --- |
 | 명확한 헤드라인 | Pass | `Validate eldercare AI workflows without exposing sensitive data.`로 최종 이득을 한 문장에 고정했다. |
 | 보조 설명 | Pass | API docs, request testing, operations review, consent visibility를 하나의 controlled surface에서 검토한다고 설명한다. |
-| 직관적 이미지 | Pass | 실제 Partner Console 캡처인 `assets/console-home-preview.png`를 히어로 배경으로 사용한다. |
+| 직관적 이미지 | Pass | 실제 Partner Console 캡처인 `apps/web/assets/console-home-preview.png`를 히어로 배경으로 사용한다. |
 | 동사형 CTA | Pass | `Open the console`, `Review route scope`, `Try the sandbox flow`처럼 행동 중심 문구를 사용한다. |
 | CTA 반복 배치 | Pass | 상단 navigation, 히어로, workflow section, final CTA에 반복 배치했다. |
 | 숫자/로고 증명 | Partial | `0 default PII exposure target`, `9 Partner Console routes`, `2s p95 initial view target`과 capability proof strip을 배치했다. 실제 고객 로고나 외부 검증 로고는 아직 없다. |

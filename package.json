@@ -1,11 +1,17 @@
 {
-  "name": "healthcare-prototype-ui-codex",
+  "name": "my-healthcare-app",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node server.mjs",
-    "test": "node --test tests/*.test.mjs",
-    "check": "npm test"
+    "dev": "npm --prefix apps/web run dev",
+    "dev:web": "npm --prefix apps/web run dev",
+    "dev:wireframe": "npm --prefix apps/wireframe-cards run dev",
+    "test": "npm run test:web && npm run test:wireframe",
+    "test:web": "npm --prefix apps/web test",
+    "test:wireframe": "npm --prefix apps/wireframe-cards test",
+    "check": "npm run check:web && npm run check:wireframe",
+    "check:web": "npm --prefix apps/web run check",
+    "check:wireframe": "npm --prefix apps/wireframe-cards run check"
   }
 }

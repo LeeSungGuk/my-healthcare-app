@@ -38,7 +38,7 @@ The proof cards map directly to existing prototype policies and tests:
 
 ## Verification
 
-- `node --check src/app.mjs`
+- `node --check apps/web/src/app.mjs`
 - `npm test`
 - Browser check at `http://localhost:4173/#/`
 - Desktop render checked at 1440px.

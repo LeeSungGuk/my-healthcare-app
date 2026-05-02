@@ -1,6 +1,6 @@
 # Component Structure Analysis
 
-이 문서는 루트 실행형 프로토타입의 컴포넌트 구조 현황과 개선점을 정리한다. 현재 구현은 프레임워크 의존성 없이 `src/app.mjs`가 public landing page와 Partner Console 전체 UI를 렌더링하는 정적 SPA 형태다.
+이 문서는 `apps/web` 실행형 프로토타입의 컴포넌트 구조 현황과 개선점을 정리한다. 현재 구현은 프레임워크 의존성 없이 `apps/web/src/app.mjs`가 public landing page와 Partner Console 전체 UI를 렌더링하는 정적 SPA 형태다.
 
 ## Component Tree
 
@@ -83,14 +83,14 @@ flowchart TD
   RouteInventory --> RoleMatrix["Allowed Role Matrix"]
   RouteInventory --> ScopeGuard["Out-of-Scope Route Guard"]
 
-  App --> Policies["src/policies.mjs"]
+  App --> Policies["apps/web/src/policies.mjs"]
   Policies --> LandingRoute["Public Landing Route"]
   Policies --> RoleAccess["Role Access Rules"]
   Policies --> RouteScope["Allowed Route Inventory"]
   Policies --> Redaction["Sensitive Text Redaction"]
   Policies --> ApiKeySafety["API Key One-Time Reveal Rule"]
 
-  App --> MockData["src/mock-data.mjs"]
+  App --> MockData["apps/web/src/mock-data.mjs"]
   MockData --> TenantData["Tenant/User Context"]
   MockData --> ApiData["API Schema and Key Data"]
   MockData --> SandboxData["Sandbox Scenarios and Responses"]
@@ -100,18 +100,18 @@ flowchart TD
 
 ## Current Structure
 
-- `index.html`: SPA mount point. `src/app.mjs`를 module script로 로드한다.
-- `assets/console-home-preview.png`: 랜딩 히어로 배경으로 쓰이는 실제 Partner Console 캡처 이미지다.
-- `src/app.mjs`: landing page, 라우팅, 상태, 이벤트 핸들링, 화면별 HTML 렌더링을 담당한다.
-- `src/policies.mjs`: public landing route, protected console route scope, role access, privacy redaction, API key one-time reveal 같은 정책성 로직을 담당한다.
-- `src/mock-data.mjs`: synthetic tenant, API schema, sandbox scenario, response, report, ops, consent 데이터를 제공한다.
-- `src/styles.css`: landing page, Partner Console 레이아웃, 표, 카드, badge, responsive style을 담당한다.
-- `server.mjs`: dependency-free static file server이며 SPA fallback을 제공한다.
-- `tests/policies.test.mjs`: landing route separation, route scope, role visibility, sensitive redaction, API key one-time reveal 정책을 검증한다.
+- `apps/web/index.html`: SPA mount point. `apps/web/src/app.mjs`를 module script로 로드한다.
+- `apps/web/assets/console-home-preview.png`: 랜딩 히어로 배경으로 쓰이는 실제 Partner Console 캡처 이미지다.
+- `apps/web/src/app.mjs`: landing page, 라우팅, 상태, 이벤트 핸들링, 화면별 HTML 렌더링을 담당한다.
+- `apps/web/src/policies.mjs`: public landing route, protected console route scope, role access, privacy redaction, API key one-time reveal 같은 정책성 로직을 담당한다.
+- `apps/web/src/mock-data.mjs`: synthetic tenant, API schema, sandbox scenario, response, report, ops, consent 데이터를 제공한다.
+- `apps/web/src/styles.css`: landing page, Partner Console 레이아웃, 표, 카드, badge, responsive style을 담당한다.
+- `apps/web/server.mjs`: dependency-free static file server이며 SPA fallback을 제공한다.
+- `apps/web/tests/policies.test.mjs`: landing route separation, route scope, role visibility, sensitive redaction, API key one-time reveal 정책을 검증한다.
 
 ## Strengths
 
-- 정책 로직이 `src/policies.mjs`로 분리되어 있어 privacy/security guard를 테스트하기 쉽다.
+- 정책 로직이 `apps/web/src/policies.mjs`로 분리되어 있어 privacy/security guard를 테스트하기 쉽다.
 - public landing route가 protected console route inventory와 분리되어 있어 마케팅 진입면과 검증 대상 콘솔 범위를 혼동하지 않는다.
 - mock data가 별도 파일로 분리되어 화면 렌더링 코드와 fixture를 구분한다.
 - dependency-free 구조라 reviewer가 별도 install 없이 Node.js만으로 실행할 수 있다.
@@ -120,7 +120,7 @@ flowchart TD
 
 ## Improvement Points
 
-- `src/app.mjs`가 화면 렌더링, 상태 변경, action handling을 모두 담고 있어 프로토타입 이후에는 모듈 분리가 필요하다.
+- `apps/web/src/app.mjs`가 화면 렌더링, 상태 변경, action handling을 모두 담고 있어 프로토타입 이후에는 모듈 분리가 필요하다.
 - landing page와 console renderer가 같은 파일에 있어 후속 고도화 시 `renderLanding()` 계열을 별도 모듈로 분리하는 편이 좋다.
 - `render*` 함수들이 문자열 template을 직접 반환하므로 UI 변경이 많아지면 재사용성과 testability가 떨어진다.
 - 랜딩 신뢰 증거는 내부 capability proof 중심이다. 실제 고객 검증 단계 전에는 권위자 추천, 파트너 로고, 보안/컴플라이언스 증빙을 보강해야 한다.
@@ -130,7 +130,7 @@ flowchart TD
 
 ## Recommended Next Refactor
 
-1. `src/app.mjs`를 `src/renderers/landing.mjs`, `src/renderers/console/*.mjs`, `src/actions.mjs`, `src/state.mjs`로 분리한다.
+1. `apps/web/src/app.mjs`를 `apps/web/src/renderers/landing.mjs`, `apps/web/src/renderers/console/*.mjs`, `apps/web/src/actions.mjs`, `apps/web/src/state.mjs`로 분리한다.
 2. `landingRoute`, protected `allowedRoutes`, navigation metadata를 명확히 나눈다.
 3. Playground request validation을 endpoint schema에서 파생되도록 만든다.
 4. privacy redaction 테스트에 화면 fixture 기반 negative assertion을 추가한다.

@@ -16,14 +16,14 @@
 | Scope control | 8 | Landing route는 public entry로 분리하고 Partner Console 범위는 route inventory와 test로 제한한다. |
 | Privacy/security posture | 8 | PII redaction, API key one-time reveal, role guard가 정책 모듈에 있다. |
 | Test coverage | 6 | 정책 테스트는 좋지만 DOM/UI smoke test는 없다. |
-| Maintainability | 6 | `src/app.mjs`가 커져서 장기 유지보수에는 분리 필요성이 있다. |
+| Maintainability | 6 | `apps/web/src/app.mjs`가 커져서 장기 유지보수에는 분리 필요성이 있다. |
 | Accessibility readiness | 6 | label과 semantic table은 있으나 keyboard/focus audit은 아직 없다. |
 | Documentation | 8 | README, master prompt, component/code quality docs가 생겼다. |
 
 ## Strengths
 
-- `src/policies.mjs`가 public landing route, 보안/권한/route guard의 중심이라 리뷰 포인트가 명확하다.
-- `tests/policies.test.mjs`가 가장 위험한 요구사항을 직접 검증한다.
+- `apps/web/src/policies.mjs`가 public landing route, 보안/권한/route guard의 중심이라 리뷰 포인트가 명확하다.
+- `apps/web/tests/policies.test.mjs`가 가장 위험한 요구사항을 직접 검증한다.
 - 루트 진입 화면이 랜딩페이지이고 CTA를 통해 콘솔로 이동하므로 고객 Hook 단계와 검사용 콘솔이 분리된다.
 - mock data가 synthetic fixture로 분리되어 실제 개인정보나 production tenant data가 섞일 위험을 낮춘다.
 - 서버가 단순하고 SPA fallback이 있어 route hash 기반 화면 확인이 쉽다.
@@ -31,7 +31,7 @@
 
 ## Risks
 
-- `src/app.mjs`가 single-file renderer라 화면이 늘어나면 diff가 커지고 부분 테스트가 어렵다.
+- `apps/web/src/app.mjs`가 single-file renderer라 화면이 늘어나면 diff가 커지고 부분 테스트가 어렵다.
 - 랜딩페이지와 콘솔 렌더러가 같은 파일에 있어 고도화 단계에서는 모듈 경계가 흐려질 수 있다.
 - 문자열 template 기반 렌더링은 복잡한 state interaction이 늘어날수록 escape 누락, event target 실수, DOM 구조 회귀 가능성이 있다.
 - redaction은 demo pattern 중심이다. 실제 데이터 형태가 다양해지면 정책 함수만으로 충분하지 않을 수 있다.

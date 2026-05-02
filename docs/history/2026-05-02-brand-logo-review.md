@@ -2,7 +2,7 @@
 
 ## Context
 
-A new logo image was added under `assets/brand/silvercare-main-logo.png`.
+A new logo image was added under `apps/web/assets/brand/silvercare-main-logo.png`.
 
 The current landing page still uses the text-based `SC` brand mark. The new image
 was reviewed as a candidate before applying it to the UI.

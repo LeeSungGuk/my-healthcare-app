@@ -29,8 +29,8 @@ Open `http://localhost:4173`.
 ```bash
 npm test
 npm run check
-node --check src/app.mjs
-node --check server.mjs
+node --check apps/web/src/app.mjs
+node --check apps/web/server.mjs
 ```
 
 The tests cover:
@@ -107,13 +107,13 @@ flowchart TD
   Content --> RouteInventory["Route Inventory"]
   Content --> PermissionDenied["Permission Denied State"]
 
-  App --> Policies["src/policies.mjs"]
+  App --> Policies["apps/web/src/policies.mjs"]
   Policies --> RoleAccess["Role Access Rules"]
   Policies --> RouteScope["Allowed Route Inventory"]
   Policies --> Redaction["Sensitive Text Redaction"]
   Policies --> ApiKeySafety["API Key One-Time Reveal Rule"]
 
-  App --> MockData["src/mock-data.mjs"]
+  App --> MockData["apps/web/src/mock-data.mjs"]
   MockData --> ApiData["API Schema and Key Data"]
   MockData --> SandboxData["Sandbox Scenarios and Responses"]
   MockData --> OpsData["Ops Logs and Review Events"]
@@ -126,39 +126,44 @@ Full component analysis: [`docs/component-structure-analysis.md`](docs/component
 
 ```text
 my-healthcare-app
-├── README.md
-├── UX_FLOW.md
-├── assets
-│   └── console-home-preview.png
+├── apps
+│   ├── api
+│   │   └── README.md
+│   ├── web
+│   │   ├── assets
+│   │   ├── index.html
+│   │   ├── package.json
+│   │   ├── server.mjs
+│   │   ├── src
+│   │   └── tests
+│   └── wireframe-cards
+│       ├── assets
+│       ├── index.html
+│       ├── package.json
+│       ├── server.mjs
+│       ├── src
+│       └── tests
 ├── docs
+│   ├── assets
 │   ├── code-quality-evaluation.md
 │   ├── component-structure-analysis.md
+│   ├── history
 │   ├── landing-page-checklist-evaluation.md
 │   └── master-prompt.md
-├── index.html
-├── package.json
-├── server.mjs
-├── healthcare-figma-wireframe-cards
-│   ├── README.md
-│   ├── assets
-│   ├── src
-│   └── tests
-├── src
-│   ├── app.mjs
-│   ├── mock-data.mjs
-│   ├── policies.mjs
-│   └── styles.css
-└── tests
-    └── policies.test.mjs
+├── tasks
+├── README.md
+├── UX_FLOW.md
+└── package.json
 ```
 
 ## Key Scripts
 
-- `src/app.mjs`: static SPA renderer, public landing page, in-memory state, route rendering, and UI action handling.
-- `src/policies.mjs`: landing route separation, role access, route scope, privacy redaction, API key one-time reveal policy.
-- `src/mock-data.mjs`: synthetic fixture data for tenant context, API schema, sandbox responses, reports, ops logs, and consent records.
-- `server.mjs`: small static file server with SPA fallback.
-- `tests/policies.test.mjs`: policy regression tests.
+- `apps/web/src/app.mjs`: static SPA renderer, public landing page, in-memory state, route rendering, and UI action handling.
+- `apps/web/src/policies.mjs`: landing route separation, role access, route scope, privacy redaction, API key one-time reveal policy.
+- `apps/web/src/mock-data.mjs`: synthetic fixture data for tenant context, API schema, sandbox responses, reports, ops logs, and consent records.
+- `apps/web/server.mjs`: small static file server with SPA fallback.
+- `apps/web/tests/policies.test.mjs`: policy regression tests.
+- `apps/wireframe-cards`: supporting Figma-style wireframe card board app.
 
 The major scripts now include JSDoc-style comments written for both human developers and AI agents. The comments mark which file owns rendering, policy, fixture, and server responsibilities so later work does not blur those boundaries.
 
@@ -167,14 +172,14 @@ The major scripts now include JSDoc-style comments written for both human develo
 - No dependency install is required beyond Node.js.
 - Landing page now adds a customer Hook stage before the console.
 - Route scope is limited to Partner Console and verified by tests.
-- Role-based module visibility is centralized in `src/policies.mjs`.
+- Role-based module visibility is centralized in `apps/web/src/policies.mjs`.
 - API key raw value is shown only in a one-time issue state and stripped from list rows.
 - Mock data is synthetic and separated from rendering.
 - Docs now include component structure and code quality evaluation.
 
 ## Known Gaps
 
-- `src/app.mjs` is still a single large renderer. It is acceptable for prototype review, but should be split before productization.
+- `apps/web/src/app.mjs` is still a single large renderer. It is acceptable for prototype review, but should be split before productization.
 - Landing proof uses internal capability evidence, not real customer logos or authority testimonials yet.
 - UI tests are policy-focused. Browser smoke tests should be added for route rendering and permission denied states.
 - Request validation is minimal and should eventually derive from an OpenAPI-compatible schema.
