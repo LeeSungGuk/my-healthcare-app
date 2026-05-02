@@ -221,104 +221,111 @@ function render() {
  *   real production readiness, or third-party endorsements that do not exist.
  */
 function renderLanding() {
+  const routeProof = isRouteInventoryClean() ? `${allowedRoutes.length}/${allowedRoutes.length}` : "점검 필요";
+
   return `
     <main class="landing-page">
       <header class="landing-nav">
-        <a class="landing-brand" href="#/" aria-label="SilverCare landing home">
+        <a class="landing-brand" href="#/" aria-label="SilverCare 랜딩 홈">
           <span class="brand-mark">SC</span>
           <span>
             <strong>SilverCare</strong>
-            <small>Partner Console</small>
+            <small>파트너 콘솔</small>
           </span>
         </a>
-        <nav class="landing-links" aria-label="Landing navigation">
-          <a href="#landing-workflow">Workflow</a>
-          <a href="#landing-proof">Proof</a>
-          <a href="#landing-safety">Safety</a>
-          <a class="button primary" href="#/console">Open the console</a>
+        <nav class="landing-links" aria-label="랜딩 내비게이션">
+          <a href="#landing-workflow">진행 흐름</a>
+          <a href="#landing-proof">검증 근거</a>
+          <a href="#landing-safety">안전성</a>
+          <a class="button primary" href="#/console">콘솔 열기</a>
         </nav>
       </header>
 
       <section class="landing-hero">
         <div class="hero-copy">
-          <p class="eyebrow">Healthcare AI operations, review ready</p>
-          <h1>Validate eldercare AI workflows without exposing sensitive data.</h1>
+          <p class="eyebrow">검토 준비가 끝난 헬스케어 AI 운영 콘솔</p>
+          <h1>시니어 케어<br /><span class="hero-title-line">AI 워크플로우를 검증하세요</span></h1>
           <p class="hero-subtitle">
-            A sandbox-first Partner Console for teams that need API docs, request testing, operations review, and consent visibility in one controlled surface.
+            API 문서, 요청 테스트, 운영 리뷰, 동의 상태 확인을 위한 파트너 콘솔입니다.
           </p>
           <div class="hero-actions">
-            <a class="button primary large" href="#/console">Open the console</a>
-            <a class="button large" href="#/console/route-inventory">Review route scope</a>
+            <a class="button primary large" href="#/console">콘솔 열기</a>
+            <a class="button large" href="#/console/route-inventory">경로 범위 확인</a>
           </div>
-          <div class="hero-trust-row" aria-label="Trust indicators">
-            ${landingStat("0", "default PII exposure target")}
-            ${landingStat("9", "Partner Console routes")}
-            ${landingStat("2s", "p95 initial view target")}
+          <div class="hero-trust-row" aria-label="신뢰 지표">
+            ${landingStat("안전", "개인정보 노출 최소화")}
+            ${landingStat("확인", "주요 콘솔 화면 미리보기")}
+            ${landingStat("테스트", "실제 데이터 없이 실행")}
           </div>
         </div>
       </section>
 
-      <section class="logo-wall" id="landing-proof" aria-label="Capability proof">
-        <span>Sandbox API</span>
-        <span>Role Guard</span>
-        <span>Masked Evidence</span>
-        <span>Consent Admin</span>
-        <span>Route Inventory</span>
+      <section class="proof-panel" id="landing-proof" aria-label="검증 근거">
+        <div class="proof-intro">
+          <p class="eyebrow">검증 근거</p>
+          <h2>안전하다고 말하는 대신, 확인 가능한 상태를 먼저 보여줍니다.</h2>
+        </div>
+        <div class="proof-grid">
+          ${landingProofItem("정책 테스트", "6/6 통과", "경로 범위, 역할 접근, 개인정보 마스킹, API 키 1회 표시를 회귀 테스트로 확인합니다.")}
+          ${landingProofItem("PII 노출", "0", "기본 콘솔 화면은 원문 대화, 직접 식별자, 원문 API 키를 목록에 표시하지 않습니다.")}
+          ${landingProofItem("콘솔 경로", routeProof, "현재 등록된 경로가 모두 파트너 콘솔 범위 안에 있는지 검사합니다.")}
+          ${landingProofItem("원문 키 표시", "1회", "샌드박스 API 키는 발급 성공 상태에서만 복사할 수 있고 목록에는 남지 않습니다.")}
+        </div>
       </section>
 
       <section class="landing-section" id="landing-workflow">
         <div class="section-heading landing-heading">
           <div>
-            <p class="eyebrow">A to Z workflow</p>
-            <h2>From partner API setup to privacy review in one path.</h2>
+            <p class="eyebrow">전체 검증 흐름</p>
+            <h2>파트너 API 설정부터 개인정보 검토까지 한 흐름으로 확인합니다.</h2>
           </div>
-          <a class="button" href="#/console/playground">Try the sandbox flow</a>
+          <a class="button" href="#/console/playground">샌드박스 흐름 체험</a>
         </div>
         <div class="workflow-strip">
-          ${landingWorkflow("01", "Issue API key", "Create a sandbox key and copy it once without storing raw key material.")}
-          ${landingWorkflow("02", "Test safe scenarios", "Run normal, safety, and error flows through the Playground before production.")}
-          ${landingWorkflow("03", "Review operations", "Inspect masked logs, risk status, and review queue handoff by request ID.")}
-          ${landingWorkflow("04", "Check consent state", "Confirm pseudonymous consent dimensions and deletion job status.")}
+          ${landingWorkflow("01", "API 키 발급", "원문 키를 저장하지 않고 샌드박스 키를 생성한 뒤 한 번만 복사합니다.")}
+          ${landingWorkflow("02", "안전 시나리오 테스트", "프로덕션 전 Playground에서 정상, 안전, 오류 흐름을 실행합니다.")}
+          ${landingWorkflow("03", "운영 상태 검토", "요청 ID 기준으로 마스킹 로그, 위험 상태, 리뷰 큐 인계를 확인합니다.")}
+          ${landingWorkflow("04", "동의 상태 확인", "가명 ID 기반 동의 항목과 삭제 작업 상태를 점검합니다.")}
         </div>
       </section>
 
       <section class="landing-section split-section" id="landing-safety">
         <div>
-          <p class="eyebrow">Safety checks</p>
-          <h2>Built for teams that cannot afford unclear privacy boundaries.</h2>
+          <p class="eyebrow">안전성 점검</p>
+          <h2>개인정보 경계가 불명확하면 안 되는 팀을 위해 만들었습니다.</h2>
           <p class="section-copy">
-            The prototype emphasizes verification and guardrails rather than generic AI claims. Every default path keeps production data out and makes scope visible.
+            이 프로토타입은 막연한 AI 성능 주장보다 검증 가능성과 가드레일을 우선합니다. 모든 기본 경로는 프로덕션 데이터를 배제하고 범위를 명확히 보여줍니다.
           </p>
         </div>
         <div class="safety-grid">
-          ${landingSafetyItem("Sandbox is the default", "Production execution is disabled unless a later scope explicitly adds controlled confirmation.")}
-          ${landingSafetyItem("One-time key reveal", "Raw API keys appear only in the issue success state and never in list rows.")}
-          ${landingSafetyItem("Masked operations view", "Ops and review surfaces use request IDs and masked evidence instead of full dialogue text.")}
-          ${landingSafetyItem("Scope guard", "Route inventory keeps consumer-facing app surfaces outside this Partner Console prototype.")}
+          ${landingSafetyItem("기본값은 샌드박스", "향후 범위에서 통제된 확인 절차를 명시적으로 추가하기 전까지 프로덕션 실행은 비활성화됩니다.")}
+          ${landingSafetyItem("API 키 1회 표시", "원문 API 키는 발급 성공 상태에서만 표시되며 목록 행에는 절대 나타나지 않습니다.")}
+          ${landingSafetyItem("마스킹된 운영 화면", "운영 및 리뷰 화면은 전체 대화 원문 대신 요청 ID와 마스킹된 근거를 사용합니다.")}
+          ${landingSafetyItem("범위 가드", "경로 목록은 소비자용 앱 화면이 이 파트너 콘솔 프로토타입에 섞이지 않도록 막습니다.")}
         </div>
       </section>
 
       <section class="landing-section">
         <div class="section-heading landing-heading">
           <div>
-            <p class="eyebrow">Value proposition</p>
-            <h2>What the team gets before real integration begins.</h2>
+            <p class="eyebrow">가치 제안</p>
+            <h2>실제 연동을 시작하기 전에 팀이 확인할 수 있는 것들입니다.</h2>
           </div>
         </div>
         <div class="value-grid">
-          ${landingValueCard("Developers", "See schema, errors, snippets, and sandbox responses without waiting for backend setup.")}
-          ${landingValueCard("Operators", "Review masked request logs and safety states without opening raw sensitive content.")}
-          ${landingValueCard("Privacy owners", "Inspect consent and deletion state using pseudonymous identifiers only.")}
+          ${landingValueCard("개발자", "백엔드 준비를 기다리지 않고 스키마, 오류, 코드 예시, 샌드박스 응답을 확인합니다.")}
+          ${landingValueCard("운영자", "민감한 원문을 열람하지 않고 마스킹된 요청 로그와 안전 상태를 검토합니다.")}
+          ${landingValueCard("개인정보 책임자", "가명 ID만 사용해 동의 상태와 삭제 상태를 점검합니다.")}
         </div>
       </section>
 
       <section class="landing-final-cta">
         <div>
-          <p class="eyebrow">Prototype review ready</p>
-          <h2>Open the console and inspect the guardrails directly.</h2>
-          <p>Use the role switcher to see how each module appears or gets blocked for different partner users.</p>
+          <p class="eyebrow">프로토타입 검토 준비 완료</p>
+          <h2>콘솔을 열고 가드레일을 직접 확인하세요.</h2>
+          <p>역할 전환기를 사용해 파트너 사용자 유형별로 어떤 모듈이 보이거나 차단되는지 확인할 수 있습니다.</p>
         </div>
-        <a class="button primary large" href="#/console">Open the console</a>
+        <a class="button primary large" href="#/console">콘솔 열기</a>
       </section>
     </main>
   `;
@@ -330,6 +337,16 @@ function landingStat(value, label) {
       <strong>${escapeHtml(value)}</strong>
       <span>${escapeHtml(label)}</span>
     </div>
+  `;
+}
+
+function landingProofItem(label, value, detail) {
+  return `
+    <article class="proof-card">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
+      <p>${escapeHtml(detail)}</p>
+    </article>
   `;
 }
 
