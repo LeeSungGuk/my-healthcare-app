@@ -1,6 +1,6 @@
 # GitHub Issue 상세 태스크 목록
 
-이 폴더는 `TASKS/실버케어_SRS_v0.5_단일구조_TASKS.md`에서 추출한 태스크를 GitHub Issue 단위로 분리한 상세 명세입니다.
+이 폴더는 `docs/tasks/실버케어_SRS_v0.5_단일구조_TASKS.md`에서 추출한 태스크를 GitHub Issue 단위로 분리한 상세 명세입니다.
 
 ## 사용 기준
 

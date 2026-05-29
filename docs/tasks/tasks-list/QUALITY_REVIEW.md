@@ -1,8 +1,8 @@
 # GitHub Issue Task Quality Review
 
 - 검수일: 2026-04-28
-- 기준 문서: `TASKS/실버케어_SRS_v0.5_단일구조_TASKS.md`
-- 검수 대상: `TASKS/GitHub-Issues/*.md`
+- 기준 문서: `docs/tasks/실버케어_SRS_v0.5_단일구조_TASKS.md`
+- 검수 대상: `docs/tasks/tasks-list/*.md`
 
 ## 식별한 품질 문제
 
