@@ -1,6 +1,6 @@
 # SilverCare Partner Console Prototype
 
-`tasks/tasks-list`의 frontend/UI 요구사항을 바탕으로 만든 dependency-free 실행형 Partner Console 프로토타입이다. 목적은 실제 백엔드 없이도 B2B partner console의 IA, role guard, privacy guardrail, developer/operator workflow를 검토하는 것이다.
+`docs/tasks/tasks-list`의 frontend/UI 요구사항을 바탕으로 만든 dependency-free 실행형 Partner Console 프로토타입이다. 목적은 실제 백엔드 없이도 B2B partner console의 IA, role guard, privacy guardrail, developer/operator workflow를 검토하는 것이다.
 
 현재 루트 화면은 고객 Hook 단계의 랜딩페이지이며, 실제 Partner Console은 CTA를 통해 `#/console`로 진입한다.
 
@@ -144,14 +144,15 @@ my-healthcare-app
 │       ├── src
 │       └── tests
 ├── docs
+│   ├── DB
 │   ├── assets
+│   ├── backend
 │   ├── code-quality-evaluation.md
 │   ├── component-structure-analysis.md
 │   ├── design
 │   ├── history
 │   ├── landing-page-checklist-evaluation.md
-│   └── master-prompt.md
-├── tasks
+│   └── tasks
 ├── README.md
 ├── UX_FLOW.md
 └── package.json
@@ -188,8 +189,10 @@ The major scripts now include JSDoc-style comments written for both human develo
 
 ## Documentation
 
-- [`docs/master-prompt.md`](docs/master-prompt.md): original prototype generation prompt.
+- [`docs/README.md`](docs/README.md): documentation rules for new backend, DB, auth, and integration work.
 - [`docs/design/README.md`](docs/design/README.md): product UI, design folder, and wireframe review app ownership rules.
+- [`docs/backend/partner-access-auth.md`](docs/backend/partner-access-auth.md): backend contract for partner request access, invite, login, and session flow.
+- [`docs/DB/partner-access-schema.md`](docs/DB/partner-access-schema.md): database schema plan for partner applications, tenants, users, invites, sessions, and audit logs.
 - [`docs/component-structure-analysis.md`](docs/component-structure-analysis.md): component hierarchy, Mermaid chart, current structure, and improvement points.
 - [`docs/code-quality-evaluation.md`](docs/code-quality-evaluation.md): code quality score, strengths, risks, and recommended quality gates.
 - [`docs/landing-page-checklist-evaluation.md`](docs/landing-page-checklist-evaluation.md): landing strategy checklist, type diagnosis, and launch-readiness gaps.
