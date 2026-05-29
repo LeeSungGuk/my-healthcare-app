@@ -2,3 +2,7 @@
 .agents/
 .gstack/
 .omo/
+.env
+.env.*
+!.env.example
+!.env.sample
