@@ -13,3 +13,17 @@ Use these notes for context that does not fit cleanly in a commit message:
 - What remains unresolved
 
 Git history answers what changed. These notes answer why it changed.
+
+## Folder Structure
+
+History notes are grouped by month.
+
+```text
+docs/history/
+├── README.md
+└── YYYY-MM/
+    └── YYYY-MM-DD-topic.md
+```
+
+Use the month folder for every dated history note. Keep only this README at the
+`docs/history/` root.
